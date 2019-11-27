@@ -1,10 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './Assets/Pages/Home/App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import {Route, BrowserRouter as Router} from 'react-router-dom';
+
+import './Assets/css/estilo.css';
+import './Assets/css/index.css';
+import './Assets/css/receitas.css';
+
+
+const Rotas = (
+    <Router>
+        <div>
+            <Route exact path="/" component={App} />
+        </div>
+    </Router>
+)
+ReactDOM.render(Rotas, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
