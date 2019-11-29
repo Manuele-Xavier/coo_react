@@ -1,46 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-<<<<<<< HEAD
-=======
 import App from './Assets/Pages/Home/App';
->>>>>>> 9e7df5aa3279a90bee3034f413a77f2c5d343164
+import QuemSomos from './Assets/Pages/QuemSomos/QuemSomos'
+import Receitas from './Assets/Pages/Receitas/Receitas'
 import * as serviceWorker from './serviceWorker';
-import {Route,BrowserRouter as Router} from 'react-router-dom';
-//importando a página "quem somos"
-import QuemSomos from '../src/Assets/Pages/QuemSomos/QuemSomos';
+import {Route,BrowserRouter as Router , Switch} from 'react-router-dom';
 
-<<<<<<< HEAD
-
-//realizamos a criação de rotas
-const Rotas= (
-    <Router>
-        <div>
-           
-            <Route exact path ="/QuemSomos" component={QuemSomos}/>
-            
-           
-        </div>
-    </Router>
-)
-
-// ReactDOM.render(<App />, Rotas, document.getElementById('root'));
-=======
-import {Route, BrowserRouter as Router} from 'react-router-dom';
 
 import './Assets/css/estilo.css';
 import './Assets/css/index.css';
 import './Assets/css/receitas.css';
 
 
-const Rotas = (
+
+//realizamos a criação de rotas
+const Rotas= (
     <Router>
         <div>
-            <Route exact path="/" component={App} />
+            <Switch>
+            
+            <Route exact path ="/" component={App}/>
+            <Route exact path ="/QuemSomos" component={QuemSomos}/>
+            <Route exact path ="/Receitas" component={Receitas}/>
+            </Switch>
+            
+           
         </div>
     </Router>
 )
->>>>>>> 9e7df5aa3279a90bee3034f413a77f2c5d343164
 ReactDOM.render(Rotas, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
