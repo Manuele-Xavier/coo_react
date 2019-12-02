@@ -2,41 +2,44 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
 
-import '../../css/receitas.css';
-import img_receitas from '../../images/receita11.jpg';
-import img_receitas2 from '../../images/receita3.jpg';
-import img_receitas3 from '../../images/receita9.jpg';
-import img_receitas4 from '../../images/receita7.jpg';
-import img_receitas5 from '../../images/receita10.jpg';
-import img_receitas6 from '../../images/receita14.jpg';
-import img_receitas7 from '../../images/receita2.jpg';
-import img_receitas8 from '../../images/receita19.jpg';
-import img_receitas9 from '../../images/receita5.jpg';
-import img_receitas10 from '../../images/receita6.jpg';
-import img_receitas11 from '../../images/receita12.jpg';
-import img_receitas12 from '../../images/receita13.jpg';
+import '../../Assets/css/receitas.css'
+import img_receitas from '../../Assets/images/receita11.jpg';
+// import img_receitas2 from '../../Assets/images/receita3.jpg';
+// import img_receitas3 from '../../Assets/images/receita9.jpg';
+// import img_receitas4 from '../../Assets/images/receita7.jpg';
+// import img_receitas5 from '../../Assets/images/receita10.jpg';
+// import img_receitas6 from '../../Assets/images/receita14.jpg';
+// import img_receitas7 from '../../Assets/images/receita2.jpg';
+// import img_receitas8 from '../../Assets/images/receita19.jpg';
+// import img_receitas9 from '../../Assets/images/receita5.jpg';
+// import img_receitas10 from '../../Assets/images/receita6.jpg';
+// import img_receitas11 from '../../Assets/images/receita12.jpg';
+// import img_receitas12 from '../../Assets/images/receita13.jpg';
+
+import Header from '../../Componentes/Header/Header';
+import Footer from '../../Componentes/Footer/Footer';
 class Receitas extends Component {
 
     constructor() {
         super();
         this.state = {
             lista: [],
-            receita: "",
+            receita_titulo: "",
             conteudo_receita: "",
-            loading: false,
-            modal4: false,
-            modalReceita:{
-            receita: "",
-            conteudo_receita: "",
+            modal: false,
+            modalReceita: {
+                receita_titulo: "",
+                conteudo_receita: "",
+
             }
 
         }
     }
 
-    toggle = nr => () => {
-        let modal4 = 'modal' + nr
+
+    toggle = () => {
         this.setState({
-            [modal4]: !this.state[modal4]
+            modal: !this.state.modal
         });
     }
 
@@ -60,16 +63,21 @@ class Receitas extends Component {
 
 
     }
-    alterarEvento = (evento) => {
-        console.log(evento)
-    
+
+    modalDaReceita = (titulo, conteudo) => {
+        console.log("algo"+titulo+conteudo)
         this.setState({
-          modalReceita: {
-          
-          }
+            modalReceita: {
+                titulo:titulo,
+                conteudo:conteudo
+            }
+
         });
+        console.log(this.state.modalReceita.titulo)
+        this.toggle(4);
 
     }
+
 
 
     componentDidMount() {
@@ -88,15 +96,28 @@ class Receitas extends Component {
 
 
             <div className="postscontainer">
+                
+
+                <Header />
+                <h1 className="tituloposts1">Receitas</h1>
+                <div className="flexposts">
                 {
                     //varrer a lista de evento
                     this.state.lista.map(function (receita) {
+                        console.log(receita);
                         return (
+                            
+                            <div className="cardcestas posts" onClick={() => this.modalDaReceita(receita.titulo, receita.conteudo)} key={receita.receitaId}>
 
-                            <div key={receita.receitaId} >
-                                <p> {receita.titulo}</p>
-                                <p> {receita.conteudo}</p>
+                                
+                                    <img src={receita.imagemReceita && require(`../../Assets/images/receitas/${receita.imagemReceita}`)} 
+                                        className="imgcestas" />
+                                    <h3 className="titulocestas"><p> {receita.titulo}</p></h3>
+                                    
+                                
                             </div>
+                            
+
                             //colocamos uma key pois cada linha em jsx precisa de um id unico
 
                         )
@@ -104,47 +125,20 @@ class Receitas extends Component {
 
                     }.bind(this))
                 }
-                <form method="get" id="modalreceitas" onSubmit={this.exporReceitas}>
+                </div>
 
-                    <label>
-                        <input type="text" value={this.state.titulo}
-                            onChange={this.atualizaEstado} name="titulo"
-                        />
-                    </label>
-                    <label>
-                        <input type="text" value={this.state.conteudo}
-                            onChange={this.atualizaEstado} name="conteudo"
-                        />
-                    </label>
-                </form>
 
-                <MDBContainer>
 
-                    <MDBBtn color="primary" onClick={this.toggle(4)}>Large modal</MDBBtn>
-                    <MDBModal isOpen={this.state.modal4} toggle={this.toggle(4)} size="lg">
-                        <MDBModalHeader toggle={this.toggle(4)}>MDBModal title</MDBModalHeader>
-                        <MDBModalBody>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
-                            </MDBModalBody>
-                        <MDBModalFooter>
-                            <MDBBtn color="secondary" onClick={this.toggle(4)}>Close</MDBBtn>
-                            <MDBBtn color="primary">Save changes</MDBBtn>
-                        </MDBModalFooter>
-                    </MDBModal>
-                </MDBContainer>
 
-                <h1 className="tituloposts1">Receitas</h1>
+
+
+
+
+                
                 <div className="flexposts">
-                    <div className="cardcestas posts" >
-                        <a href="Ravioli com Queijo de Cabra Brócolis e Ervas"
-                            title="Ravioli com Queijo de Cabra Brócolis e Ervas" className="link block">
-                            <img src={img_receitas} alt="Ravioli com Queijo de Cabra Brócolis e Ervas"
-                                className="imgcestas" />
-                            <h3 className="titulocestas">Ravioli com queijo de cabra, brócolis e ervas</h3>
-                        </a>
-                        <button onClick={e => this.mostrarReceita()}>>sdsdsd</button>
+                    {/* <div className="cardcestas posts" onClick={e => this.modalDaReceita()}>
+
+
                     </div>
 
                     <div className="cardcestas posts">
@@ -222,7 +216,7 @@ class Receitas extends Component {
                             <img src={img_receitas12} alt="Mexilhão Frito" className="imgcestas" />
                             <h3 className="titulocestas">Mexilhão frito</h3>
                         </a>
-                    </div>
+                    </div> */}
                     <div className="espacamento_pag">
 
                         <ul className="paginacao">
@@ -248,6 +242,30 @@ class Receitas extends Component {
 
 
 
+                <MDBContainer>
+
+                    <form method="get" id="modalreceitas" onSubmit={this.exporReceitas}>
+
+                        <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+                            <MDBModalHeader toggle={this.toggle}>Receita</MDBModalHeader>
+                            <MDBModalBody>
+                                <div>
+                                        <h1>{this.state.modalReceita.titulo}</h1>
+                                        <br/>
+                                        <br/>
+                                        <p>{this.state.modalReceita.conteudo}</p>
+                                </div>
+                            </MDBModalBody>
+                            <MDBModalFooter>
+                                <MDBBtn color="secondary" onClick={this.toggle}>Fechar</MDBBtn>
+
+                            </MDBModalFooter>
+                        </MDBModal>
+                    </form>
+                </MDBContainer>
+
+
+                <Footer />
             </div>
 
 

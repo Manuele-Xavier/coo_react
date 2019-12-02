@@ -13,29 +13,29 @@
 }
 
 body{
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif !important;
     background-color: #EFF3F6;
 }
 
 .container_ {
-    display: flex;
-    justify-content: space-between;
-    width: 1000px;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 1000px !important;
 }
-.btn{
-    font-weight: 500;
-    border-radius: 4px;
-    -webkit-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
-    -moz-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
-    box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
-    background-color: #BF0404;
-    border:none;
-    width: 100px;
-    height: 30px;
-    color:white;
+.btn_ {
+    font-weight: 500  !important;
+    border-radius: 4px !important;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1) !important;
+    -moz-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1) !important;
+    box-shadow: 1px 1px 1px 0px rgba(204,204,204,1) !important;
+    background-color: #BF0404 !important;
+    border:none !important;
+    width: 100px !important;
+    height: 30px !important;
+    color:white !important;
   }
-  .btn a{
-    color:white;
+  .btn_ a{
+    color:white ;
     text-decoration: none; 
   }
 .btn1{
@@ -51,7 +51,7 @@ body{
     color:white;
   }
   .btn2{
-    font-weight: 500;
+    font-weight: 500 ;
     border-radius: 4px;
     -webkit-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
     -moz-box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);

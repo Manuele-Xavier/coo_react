@@ -1,13 +1,15 @@
 //fazendo a componentização da página quem somos - Julia
 import React from 'react';
-import '../../css/quemsomos.css';
-import '../../css/estilo.css';
-import img_quem from '../../images/img-quem-somos.jpg'
+import '../../Assets/css/estilo.css';
+import img_quem from '../../Assets/images/img-quem-somos.jpg';
+import Header from '../../Componentes/Header/Header';
+import Footer from '../../Componentes/Header/Header';
 
 
 function App(){
     return(
-        <main>        
+        <main>  
+            <Header/>
         <section>
             <div className="titulo_quemsomos">
                 <h1> Nossa História</h1>
@@ -51,6 +53,7 @@ function App(){
                 </div>
             </div>
         </section>   
+        <Footer/>
     </main>
 
     );

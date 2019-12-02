@@ -1,17 +1,21 @@
 import React from 'react';
 
-import img_home from '../../images/1.png'
-import img_home2 from '../../images/2.png'
-import img_home3 from '../../images/3.png'
-import img_home4 from '../../images/agri.png'
-import img_home5 from '../../images/banner.jpg'
-import img_home6 from '../../images/receita15.jpg'
-import img_home7 from '../../images/receita16.jpg'
-import img_home8 from '../../images/receita17.jpg'
+
+import img_home from '../../Assets/images/1.png'
+import img_home2 from '../../Assets/images/2.png'
+import img_home3 from '../../Assets/images/3.png'
+import img_home4 from '../../Assets/images/agri.png'
+import img_home5 from '../../Assets/images/banner.jpg'
+import img_home6 from '../../Assets/images/receita15.jpg'
+import img_home7 from '../../Assets/images/receita16.jpg'
+import img_home8 from '../../Assets/images/receita17.jpg'
+import Header from '../../Componentes/Header/Header';
+import Footer from '../../Componentes/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
+        <Header/>
       <section id="banner">
         <div className="container column">
             <div className="banner_headline">
@@ -176,6 +180,7 @@ function App() {
         </div>
 
     </main>
+    <Footer/>
     </div>
   );
 }

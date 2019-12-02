@@ -32,7 +32,7 @@ footer h3{
 }
 
 .redesImg img {
-    padding: 10px 10px;
+    padding: 10px 10px !important;
 }
 
 
@@ -55,13 +55,13 @@ footer h3{
 }
 
 .telefone img {
-    padding: 10px 10px;
+    padding: 10px 10px !important;
 }
 
 /* Tamanho dos icones do rodapé */
 .svg {
-    height: 25px;
-    width: 25px;
+    height: 25px !important;
+    width: 25px !important;
 }
 .copyy{
   background-color: #BF0404;
