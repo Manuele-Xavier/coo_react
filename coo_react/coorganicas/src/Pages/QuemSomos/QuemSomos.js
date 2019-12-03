@@ -1,9 +1,10 @@
 //fazendo a componentização da página quem somos - Julia
 import React from 'react';
 import '../../Assets/css/estilo.css';
+import '../../Assets/css/quemsomos.css';
 import img_quem from '../../Assets/images/img-quem-somos.jpg';
 import Header from '../../Componentes/Header/Header';
-import Footer from '../../Componentes/Header/Header';
+import Footer from '../../Componentes/Footer/Footer';
 
 
 function App(){

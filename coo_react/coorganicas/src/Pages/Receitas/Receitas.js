@@ -125,98 +125,11 @@ class Receitas extends Component {
 
                     }.bind(this))
                 }
-                </div>
-
-
-
-
-
-
+              
 
 
                 
-                <div className="flexposts">
-                    {/* <div className="cardcestas posts" onClick={e => this.modalDaReceita()}>
-
-
-                    </div>
-
-                    <div className="cardcestas posts">
-                        <a href="Gravata de Massa Italiana com Pesto de Manjericão Caseiro"
-                            title="Gravata de Massa Italiana com Pesto de Manjericão Caseiro" className="link block">
-                            <img src={img_receitas2} alt="Gravata de Massa Italiana com Pesto de Manjericão Caseiro"
-                                className="imgcestas" />
-                            <h3 className="titulocestas">Massa italiana com pesto de manjericão caseiro</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Sopa de Galinha com Ervilhas Cenouras e Batatas"
-                            title="Sopa de Galinha com Ervilhas Cenouras e Batatas" className="link block">
-                            <img src={img_receitas3} alt="Sopa de Galinha com Ervilhas Cenouras e Batatas"
-                                className="imgcestas" />
-                            <h3 className="titulocestas">Sopa de galinha com ervilhas, cenouras e batatas</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Arroz com Ervilhas Verdes Camarões e Rúcula"
-                            title="Arroz com Ervilhas Verdes Camarões e Rúcula" className="link block">
-                            <img src={img_receitas4} alt="Arroz com Ervilhas Verdes Camarões e Rúcula"
-                                className="imgcestas" />
-                            <h3 className="titulocestas">Arroz com ervilhas verdes, camarões e rúcula</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Sopa de Abóbora" title="Sopa de Abóbora" className="link block">
-                            <img src={img_receitas5} alt="Sopa de Abóbora" className="imgcestas" />
-                            <h3 className="titulocestas">Sopa de abóbora</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Panqueca de Banana" title="Panqueca de Banana" className="link block">
-                            <img src={img_receitas6} alt="Panqueca de Banana" className="imgcestas" />
-                            <h3 className="titulocestas">Panqueca de banana</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Salada de Frango com Legumes e Azeitonas" title="Salada de Frango com Legumes e Azeitonas"
-                            className="link block">
-                            <img src={img_receitas7} alt="Salada de Frango com Legumes e Azeitonas" className="imgcestas" />
-                            <h3 className="titulocestas">Salada de frango com legumes e azeitonas</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Macarrão de Abóbora Alfredo Fettucine" title="Macarrão de Abóbora Alfredo Fettucine"
-                            className="link block">
-                            <img src={img_receitas8} alt="Macarrão de Abóbora Alfredo Fettucine" className="imgcestas" />
-                            <h3 className="titulocestas">Macarrão de abóbora alfredo fettucine</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Bolo de Maçã com Canela" title="Bolo de Maçã com Canela" className="link block">
-                            <img src={img_receitas9} alt="Bolo de Maçã com Canela" className="imgcestas" />
-                            <h3 className="titulocestas">Bolo de maçã com canela</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Sanduiche com Legumes Presunto e Queijo" title="Sanduiche com Legumes Presunto e Queijo"
-                            className="link block">
-                            <img src={img_receitas10} alt="Sanduiche com Legumes Presunto e Queijo" className="imgcestas" />
-                            <h3 className="titulocestas">Sanduíche de presunto e queijo com legumes</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Frango Assado com Laranjas e Ervas" title="Frango Assado com Laranjas e Ervas"
-                            className="link block">
-                            <img src={img_receitas11} alt="Frango Assado com Laranjas e Ervas" className="imgcestas" />
-                            <h3 className="titulocestas">Frango assado com laranjas e ervas</h3>
-                        </a>
-                    </div>
-                    <div className="cardcestas posts">
-                        <a href="Mexilhão Frito" title="Mexilhão Frito" className="link block">
-                            <img src={img_receitas12} alt="Mexilhão Frito" className="imgcestas" />
-                            <h3 className="titulocestas">Mexilhão frito</h3>
-                        </a>
-                    </div> */}
+                    
                     <div className="espacamento_pag">
 
                         <ul className="paginacao">
@@ -247,17 +160,17 @@ class Receitas extends Component {
                     <form method="get" id="modalreceitas" onSubmit={this.exporReceitas}>
 
                         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-                            <MDBModalHeader toggle={this.toggle}>Receita</MDBModalHeader>
+                            <MDBModalHeader toggle={this.toggle}></MDBModalHeader>
                             <MDBModalBody>
                                 <div>
-                                        <h1>{this.state.modalReceita.titulo}</h1>
+                                        <h3>{this.state.modalReceita.titulo}</h3>
                                         <br/>
                                         <br/>
                                         <p>{this.state.modalReceita.conteudo}</p>
                                 </div>
                             </MDBModalBody>
                             <MDBModalFooter>
-                                <MDBBtn color="secondary" onClick={this.toggle}>Fechar</MDBBtn>
+                                <MDBBtn class="btn_" color="secondary" onClick={this.toggle}>Fechar</MDBBtn>
 
                             </MDBModalFooter>
                         </MDBModal>

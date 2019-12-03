@@ -49,7 +49,7 @@
 }
 
 .sobre {
-    display: flex;
+    display: flex !important;
 }
 
 .imagemsobre {

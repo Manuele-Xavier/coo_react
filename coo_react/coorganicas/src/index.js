@@ -6,19 +6,20 @@ import QuemSomos from './Pages/QuemSomos/QuemSomos'
 import Receitas from './Pages/Receitas/Receitas'
 import Login from './Pages/Login/Login'
 import Produtos from './Pages/Produtos/Produtos'
+import Perfil3 from './Pages/Perfil3/Perfil3'
 import * as serviceWorker from './serviceWorker';
 import {Route,BrowserRouter as Router , Switch} from 'react-router-dom';
 
+// Importamos o MDB React
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 import './Assets/css/estilo.css';
 import './Assets/css/index.css';
 import './Assets/css/receitas.css';
 
 
-// Importamos o MDB React
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
 
 
 
@@ -34,6 +35,7 @@ const Rotas= (
             <Route exact path ="/Produtos" component={Produtos}/>
             <Route exact path ="/Receitas" component={Receitas}/>
             <Route exact path ="/Login" component={Login}/>
+            <Route exact path ="/Perfil3" component={Perfil3}/>
             
             </Switch>
             

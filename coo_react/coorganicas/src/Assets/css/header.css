@@ -1,8 +1,8 @@
 header {
-    background-color: white !important;
-    display: flex !important;
-    justify-content: center !important;
-    padding: 20px 10px !important;
+    background-color: white t;
+    display: flex ;
+    justify-content: center ;
+    padding: 20px 10px ;
     
 }
 
@@ -13,8 +13,8 @@ header {
 }
 
 .menu {
-    display: flex !important;
-    align-items: center !important;
+    display: flex;
+    align-items: center ;
 }
 
 .menu nav ul, .menu nav li {
@@ -76,7 +76,7 @@ header {
 
 /* celular */
 @media(max-width:845px){
-    header .container {
+    header .container_ {
         flex-direction: row;
     }
 

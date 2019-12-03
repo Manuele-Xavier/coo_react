@@ -107,8 +107,8 @@ function App() {
                                     <div className="news_comments">2</div>
                                 </div> --> */}
                                 <div className="news_thumbnail">
-                                    <img src={img_home4}/>
-                                        alt="Imagem de uma mão pegando um fruto da terra">
+                                    <img src={img_home4}  alt="Imagem de uma mão pegando um fruto da terra"/>
+                                       
                                 </div>
                                 <div className="news_title">
                                     Orgânicos
@@ -151,7 +151,7 @@ function App() {
                     <a href="Omelete de Espinafre Queijo e Alho Poro" title="Omelete de Espinafre Queijo e Alho Poro"
                         className="link block">
                         <img src={img_home6} alt="Omelete de Espinafre Queijo e Alho Poro" className="imgcestas"/>
-                            className="imgcestas">
+                            
                         <h3 className="titulocestas">Omelete de Espinafre Queijo e Alho Poro</h3>
 
                     </a>
@@ -169,7 +169,7 @@ function App() {
                     <a href="Sopa de Legumes com Pão Ralado e Salsa" title="Sopa de Legumes com Pão Ralado e Salsa"
                         className="link block">
                         <img src={img_home8} alt="Sopa de Legumes com Pão Ralado e Salsa" className="imgcestas"/>
-                            className="imgcestas">
+                            
                         <h3 className="titulocestas">Sopa de Legumes com Pão Ralado e Salsa</h3>
 
                     </a>

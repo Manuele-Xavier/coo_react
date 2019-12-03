@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import '../../Assets/css/estilo.css';
+import '../../Assets/css/login.css';
 import Header from '../../Componentes/Header/Header';
 import Footer from '../../Componentes/Footer/Footer';
 
@@ -105,9 +106,10 @@ class Login extends Component {
     render() {
         return (
               
-          
+          <div>
+              <Header/>
             <main className="banner_login">
-                <Header/>
+                
                 <div className="cotaniner_login">
                     <div className="espaco_entrar">
                         <form method="GET" id="form_usuario" className="entrar_login">
@@ -115,7 +117,7 @@ class Login extends Component {
                                 <input type="text" placeholder="Usuario:" aria-label="Digitar o Usuario" name="Usuario"
                                     required></input>
                                 <input type="text" placeholder="Senha:" aria-label="Digitar a Senha" name="Usuario" required></input>
-                                <button type="submit" className="btn">Entrar</button>
+                                <button type="submit" className="btn_">Entrar</button>
                                 <p className="t_login">Não possui cadastro? Inscreva-se</p>
 
                             </label>
@@ -128,8 +130,8 @@ class Login extends Component {
                         <div className="espaco">
                             <div className="radius">
                                 {/*os values estão com valores determinados pelo banco de dados */ }
-                                <input type="radio" name="perfil" className="btn_cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
-                                <input type="radio" name="perfil" className="btn_cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
+                                <input type="radio" name="perfil" className="btn__cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
+                                <input type="radio" name="perfil" className="btn__cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
                             </div>
                         </div>
 
@@ -175,6 +177,10 @@ class Login extends Component {
                             </label>
 
                         </label>
+                        <label> <span>CEP:</span>
+                            <input type="text" placeholder="Digite o telefone" aria-label="Digite o telefone" name="Telefone"
+                                required className="in_login"  onChange={this.AtualizaEstado}></input>
+                        </label>
                         <label> <span>Telefone:</span>
                             <input type="text" placeholder="Digite o telefone" aria-label="Digite o telefone" name="Telefone"
                                 required className="in_login"  onChange={this.AtualizaEstado}></input>
@@ -184,13 +190,14 @@ class Login extends Component {
                             <input type="text" placeholder="Digite o CNPJ" aria-label="Digitar CNPJ" name="Cnpj" required
                                 className="in_login"  onChange={this.AtualizaEstado}></input>
                         </label>
-                        <button type="submit" className="btn">Cadastrar</button>
+                        <button type="submit" className="btn_">Cadastrar</button>
 
 
                     </form>
                 </div>
                 <Footer/>
             </main>
+            </div>
            
 
         )
