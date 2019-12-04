@@ -117,7 +117,7 @@ class Login extends Component {
                                 <input type="text" placeholder="Usuario:" aria-label="Digitar o Usuario" name="Usuario"
                                     required></input>
                                 <input type="text" placeholder="Senha:" aria-label="Digitar a Senha" name="Usuario" required></input>
-                                <button type="submit" className="btn_">Entrar</button>
+                                <button type="submit" class="btn_">Entrar</button>
                                 <p className="t_login">Não possui cadastro? Inscreva-se</p>
 
                             </label>
@@ -130,8 +130,8 @@ class Login extends Component {
                         <div className="espaco">
                             <div className="radius">
                                 {/*os values estão com valores determinados pelo banco de dados */ }
-                                <input type="radio" name="perfil" className="btn__cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
-                                <input type="radio" name="perfil" className="btn__cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
+                                <input type="radio" name="perfil" className="btn_cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
+                                <input type="radio" name="perfil" className="btn_cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@ class Login extends Component {
                             <input type="text" placeholder="Digite o CNPJ" aria-label="Digitar CNPJ" name="Cnpj" required
                                 className="in_login"  onChange={this.AtualizaEstado}></input>
                         </label>
-                        <button type="submit" className="btn_">Cadastrar</button>
+                        <button type="submit" class="btn_">Cadastrar</button>
 
 
                     </form>

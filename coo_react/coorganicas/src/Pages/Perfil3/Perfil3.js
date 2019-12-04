@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBTable, MDBTableBody, MDBTableHead,  MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import {  MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import img_perfil3 from '../../Assets/images/Agrupar 53.png'
 import '../../Assets/css/perfil.css'
 import '../../Assets/css/estilo.css'
@@ -13,13 +13,15 @@ class Perfil3 extends Component {
         super();
         this.state = {
             lista: [],
-            
             modal: false,
+            idReserva:"" ,
             modalReserva: {
                 dataDaReserva: "",
                 quantidadeReserva: "",
                 dataDaEspera: "",
                 statusDaReserva: "",
+                idReserva:"" 
+                
 
             }
 
@@ -48,14 +50,42 @@ class Perfil3 extends Component {
 
 
     }
-    modalPerfil3 = (dataReserva, quantidade, dataEspera, statusReserva) => {
+
+    //delete
+
+    deletarReserva = (reserva) =>{
+        let id_Reserva = this.state.modalReserva.idReserva
+        this.setState({ erroMsg : "" })
+        
+        console.log("Excluindo");
+        
+        fetch("http://localhost:5000/api/Reserva/"+id_Reserva, {
+           method : "DELETE",
+           headers : { 
+               "Content-Type" : "application/json"
+           }
+        })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            this.mostrarReserva();
+            this.setState( () => ({ lista: this.state.lista }));
+        })
+        
+    }
+
+
+    //delete
+    modalPerfil3 = (dataReserva, quantidade, dataEspera, statusReserva, idReserva) => {
         // console.log("algo"+titulo+conteudo)
         this.setState({
             modalReserva: {
                 dataReserva:dataReserva,
                 quantidade:quantidade,
                 dataEspera:dataEspera,
-                statusReserva:statusReserva
+                statusReserva:statusReserva,
+                reservaId:idReserva
+                
             }
 
         });
@@ -85,6 +115,9 @@ class Perfil3 extends Component {
             <main>
                 
             <div className="container_perfil">
+            <div className="esquerdo">
+                        <nav className="menu_perfil"></nav>
+                    </div>
             
                 
                 
@@ -157,9 +190,9 @@ class Perfil3 extends Component {
             </div>
         </MDBModalBody>
         <MDBModalFooter>
-            <MDBBtn class="btn_" color="secondary" onClick={this.toggle}>Deletar</MDBBtn>
+            <MDBBtn class="btn_" color="secondary"  onClick={() => this.deletarReserva(this.state.modalReserva.reservaId)} >Deletar</MDBBtn>
             <MDBBtn class="btn_" color="secondary" onClick={this.toggle}>Fechar</MDBBtn>
-
+ 
         </MDBModalFooter>
     </MDBModal>
 </form>
