@@ -111,7 +111,7 @@ class Perfil extends Component {
                        
                     
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>
-                        <h1 className="t_perfil">Cadastrar produtos</h1>
+                        <h1 className="t_perfil">Cadastrar ofertas</h1>
                         <label> <span>Produto</span>
                             <input type="text" aria-label="Digite o Produto" name="produto" value={this.state.produto} required onChange={this.atualizaStateCampo.bind(this)}></input>
                         </label>

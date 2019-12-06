@@ -4,6 +4,7 @@ import img_perfil3 from '../../Assets/images/Agrupar 53.png'
 import '../../Assets/css/perfil.css'
 import '../../Assets/css/estilo.css'
 import '../../Assets/css/menuPerfil.css'
+import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 
 
 
@@ -115,21 +116,14 @@ class Perfil3 extends Component {
             <main>
                 
             <div className="container_perfil">
-            <div className="esquerdo">
-                        <nav className="menu_perfil"></nav>
-                    </div>
+            <MenuPerfilC/>
             
                 
                 
     
                 <div className="direito2">
                     <h1 className="t_perfil">Minhas Reservas</h1>
-                    <form method="get" id="form_busca" className="formdi_busca">
-                        <label>
-                            <input type="text" placeholder="Digite o produto..." className="form_buscai"
-                                aria-label="buscar produto"/>
-                        </label>
-                    </form>
+                    
                     <form method="GET" id="form_meusprodutos" className="products">
                     {
                     //varrer a lista de evento
@@ -167,9 +161,9 @@ class Perfil3 extends Component {
 
 
                     
-                </div>
+                
     
-            </div>
+            
 
             <MDBContainer>
 
@@ -197,6 +191,8 @@ class Perfil3 extends Component {
     </MDBModal>
 </form>
 </MDBContainer>
+</div>
+</div>
         </main>
             
         );

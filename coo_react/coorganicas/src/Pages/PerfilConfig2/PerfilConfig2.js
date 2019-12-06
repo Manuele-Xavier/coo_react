@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import Axios from 'axios';
 // import { bindExpression } from '@babel/types';
 import toastr from 'toastr';
+import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
+import img_perfil3 from '../../Assets/images/photo.svg'
 
 
 
@@ -146,10 +148,22 @@ toastr.options = {
     render(){
         return(
             <div className="container_perfil">
+                <MenuPerfilA/>
+               
                 <form  id="form_cadastro_conf" onSubmit={this.putUsuario} onReset={this.limpaForm}>
               
                                     
                                 <h1 className="t_perfil">Editar minhas informações</h1>
+
+                                <div className="carde_receita">
+                            <div className="tracado"><img src={img_perfil3} alt="Campo para inserir uma imagem"/></div>
+                            <div className="btn_file_espaco">
+                                <label>
+                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..." id="img__inputt"/>
+                                </label>
+                            </div>
+                        </div>
+
                                 <label> <span>Nome:</span>
                                     <input type="text" placeholder="Digite o seu nome..." aria-label="Digite o seu nome" name="nome"  value ={this.state.putUsuario.nome } onChange={this.putSetState}></input>
                                 </label><br></br>

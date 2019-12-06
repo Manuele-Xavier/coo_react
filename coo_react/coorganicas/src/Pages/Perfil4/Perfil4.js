@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ImgCadastroReceitas from '../../Assets/images/photo.svg';
 import toastr from 'toastr';
+import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 
 toastr.options = {
 
@@ -90,9 +91,7 @@ class CadastrarReceitas extends Component {
     render() {
         return (
             <div className="container_perfil">
-                <div className="esquerdo">
-                        <nav className="menu_perfil"></nav>
-                    </div>
+                <MenuPerfilC/>
                 <div className="direito3">
                     <h1 className="t_perfil">Cadastrar Receitas</h1>
                     <form method="get" id="form_receita" onSubmit={this.CadastrarReceitas.bind(this)}>
