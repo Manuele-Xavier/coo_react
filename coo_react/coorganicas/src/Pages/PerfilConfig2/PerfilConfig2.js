@@ -17,7 +17,7 @@ toastr.options = {
     "onclick": null,
     "showDuration": "300",
     "hideDuration": "1000",
-    "timeOut": "12000",
+    "timeOut": "6000",
     "extendedTimeOut": "1000",
     "showEasing": "swing",
     "hideEasing": "linear",
@@ -33,7 +33,7 @@ toastr.options = {
         super()
         this.state={
             putUsuario:{
-                usuarioId:4,
+                usuarioId:3,
                 nome:"",
                 email:"",
                 senha:"",
@@ -106,12 +106,12 @@ toastr.options = {
 
     putUsuario=(event)=>{
         event.preventDefault();
-        let usuario_id = 4;
+        let usuario_id = 3;
         // let usuario_alterado = this.state.putUsuario
         let usuario = new FormData();
 
         // Arrumar os states para poder mandar corretamente os dados e ver o que está acontecendo com a view
-        usuario.set("usuarioId",4)
+        usuario.set("usuarioId",3)
         usuario.set("nome",this.state.putUsuario.nome)
         usuario.set("email",this.state.putUsuario.email)
         usuario.set("senha",this.state.putUsuario.senha)

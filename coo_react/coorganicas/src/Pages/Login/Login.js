@@ -4,6 +4,9 @@ import '../../Assets/css/estilo.css';
 import '../../Assets/css/login.css';
 import Header from '../../Componentes/Header/Header';
 import Footer from '../../Componentes/Footer/Footer';
+import Axios from 'axios';
+import { parseJwt } from '../../Services/auth';
+import api from '../../Services/api';
 
 
 ////fazendo a componentização da página Login- Julia
@@ -23,7 +26,11 @@ class Login extends Component {
             Numero: '',
             Telefone: '',
             Cnpj: '',
-            perfil : ""
+            perfil : "",
+            login:{
+                email:"",
+                senha:""
+            }
 
         };
     };
@@ -82,6 +89,52 @@ class Login extends Component {
      
 
     };
+
+    fazerLogin=(event)=>{
+        event.preventDefault();
+        
+        let usuario={
+            email:this.state.login.email,
+            senha:this.state.login.senha
+        }
+
+        Axios.post('http://localhost:5000/api/login',usuario)
+        .then(response=>{
+
+            console.log("Meu token é: " + response.data.token)
+
+        //caso a requisição retorne um status code 200
+        //sarvar o token no localstorage
+        //e define que a requiseição terminou
+        if (response.status === 200) {
+
+          localStorage.setItem('user-coorganicas', response.data.token)
+          this.setState({ isLoading: false })
+          //define base 64 recebendo o payload do token
+          var base64 = localStorage.getItem('user-coorganicas').split('.')[1]
+          console.log(base64)
+
+          //exibe valor convertido para string
+          console.log(window.atob(base64))
+
+          //exibe valor convertido pra json
+          console.log(JSON.parse(window.atob(base64)))
+
+          //exibe no console o tipo de usuario logado
+          console.log(parseJwt().Role)
+
+          if (parseJwt().Role === 'Administrador') {
+            this.props.history.push('/categorias')
+          } else {
+            this.props.history.push('/eventos')
+          }
+        }
+
+        })
+
+        
+    }
+
           
       
     AtualizaEstado = (input) => {
@@ -115,8 +168,8 @@ class Login extends Component {
                         <form method="GET" id="form_usuario" className="entrar_login">
                             <label>
                                 <input type="text" placeholder="Usuario:" aria-label="Digitar o Usuario" name="Usuario"
-                                    required></input>
-                                <input type="text" placeholder="Senha:" aria-label="Digitar a Senha" name="Usuario" required></input>
+                                    required value={this.state.login.email} onChange={this.AtualizaEstado}></input>
+                                <input type="text" placeholder="Senha:" aria-label="Digitar a Senha" name="Usuario" required vaue={this.state.login.senha} onChange={this.AtualizaEstado}></input>
                                 <button type="submit" class="btn_">Entrar</button>
                                 <p className="t_login">Não possui cadastro? Inscreva-se</p>
 
@@ -147,7 +200,7 @@ class Login extends Component {
                         </label>
                         <label> <span>Confirmar e-mail:</span>
                             <input type="text" placeholder="Confirme o seu e-mail" aria-label="Digitar o seu e-mail"
-                                name="Email" required className="in_login" className="in_login" onChange={this.AtualizaEstado}></input>
+                                name="Email" required  className="in_login" onChange={this.AtualizaEstado}></input>
 
                         </label>
                         <label> <span>Senha:</span>

@@ -15,7 +15,7 @@ toastr.options = {
     "onclick": null,
     "showDuration": "300",
     "hideDuration": "1000",
-    "timeOut": "12000",
+    "timeOut": "6000",
     "extendedTimeOut": "1000",
     "showEasing": "swing",
     "hideEasing": "linear",
@@ -139,10 +139,11 @@ class Perfil2 extends Component{
             if(response.status===200){
                 if(response.erro !== true){
                     toastr.success("Oferta deletada com sucesso"); //error warning
+                    this.toggle();
                 }
             }
         }).catch(error=>{
-            toastr.error("Falha em deletar a oferta")
+            toastr.error("Falha em deletar a oferta pois ja está reservada")
         })
         
     }
@@ -155,7 +156,7 @@ class Perfil2 extends Component{
 
     render(){
         return( 
-            <>
+            
             <main className="mobile">
                 <div className="container_perfil">
                 <div className="esquerdo">
@@ -188,10 +189,10 @@ class Perfil2 extends Component{
 
                         
                     </div>  
-                </div>
                 
                 
-            </main>
+                
+            
             <MDBContainer>
             <form onSubmit={this.AlteraInfo}>
             <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
@@ -233,8 +234,10 @@ class Perfil2 extends Component{
             </MDBModal>
             </form>
           </MDBContainer>
+          </div>
+          </main>
          
-          </>
+          
             
         
 

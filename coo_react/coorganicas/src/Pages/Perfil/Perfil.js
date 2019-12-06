@@ -3,6 +3,7 @@ import Axios from 'axios';
 import toastr from 'toastr';
 
 import '../../Assets/css/estilo.css'
+import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
 
 toastr.options = {
     "closeButton": true,
@@ -106,9 +107,9 @@ class Perfil extends Component {
         return(
             <main>
                 <div className="container_perfil">
-                    <div className="esquerdo">
-                        <nav className="menu_perfil"></nav>
-                    </div>
+                    <MenuPerfilA/>
+                       
+                    
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>
                         <h1 className="t_perfil">Cadastrar produtos</h1>
                         <label> <span>Produto</span>

@@ -23,6 +23,8 @@ import './Assets/css/estilo.css';
 import './Assets/css/index.css';
 import './Assets/css/receitas.css';
 
+import './Assets/css/toastr.css'
+
 
 
 

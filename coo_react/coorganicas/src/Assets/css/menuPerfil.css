@@ -28,7 +28,7 @@
   .menu_perfil li{
     list-style: none;
 }
-.menu_perfil a{
+.menu_perfil p{
   text-decoration: none;
   color: #707070;
   font-size: 1.5em;

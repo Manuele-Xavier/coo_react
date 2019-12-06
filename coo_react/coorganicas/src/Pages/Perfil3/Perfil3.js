@@ -14,15 +14,12 @@ class Perfil3 extends Component {
         this.state = {
             lista: [],
             modal: false,
-            idReserva:"" ,
             modalReserva: {
                 dataDaReserva: "",
                 quantidadeReserva: "",
                 dataDaEspera: "",
                 statusDaReserva: "",
                 idReserva:"" 
-                
-
             }
 
         }
@@ -70,27 +67,30 @@ class Perfil3 extends Component {
             console.log(response);
             this.mostrarReserva();
             this.setState( () => ({ lista: this.state.lista }));
+            this.toggle();
         })
         
     }
 
 
     //delete
-    modalPerfil3 = (dataReserva, quantidade, dataEspera, statusReserva, idReserva) => {
+    modalPerfil3 = (dataReserva, quantidade, dataEspera, statusReserva, ReservaId) => {
         // console.log("algo"+titulo+conteudo)
+        
         this.setState({
             modalReserva: {
                 dataReserva:dataReserva,
                 quantidade:quantidade,
                 dataEspera:dataEspera,
                 statusReserva:statusReserva,
-                reservaId:idReserva
+                idReserva:ReservaId
                 
             }
 
         });
-        console.log(this.state.modalReserva)
-        this.toggle(4);
+        
+        this.toggle();
+        console.log(this.state.modalReserva.idReserva)
 
     }
 
@@ -134,10 +134,10 @@ class Perfil3 extends Component {
                     {
                     //varrer a lista de evento
                     this.state.lista.map(function (reserva) {
-                        console.log(reserva);
+                        // console.log(reserva);
                         return (
                             
-                            <div className="products2"  onClick={() => this.modalPerfil3(reserva.dataDaReserva, reserva.quantidade, reserva.dataDaEspera, reserva.statusReserva)}  key={reserva.reservaId}>
+                            <div className="products2"  onClick={() => this.modalPerfil3(reserva.dataDaReserva, reserva.quantidade, reserva.dataDaEspera, reserva.statusReserva,reserva.reservaId)}  key={reserva.reservaId}>
                             
                             
 
@@ -190,8 +190,8 @@ class Perfil3 extends Component {
             </div>
         </MDBModalBody>
         <MDBModalFooter>
-            <MDBBtn class="btn_" color="secondary"  onClick={() => this.deletarReserva(this.state.modalReserva.reservaId)} >Deletar</MDBBtn>
-            <MDBBtn class="btn_" color="secondary" onClick={this.toggle}>Fechar</MDBBtn>
+            <button className="btn_" color="secondary"  onClick={() => this.deletarReserva(this.state.modalReserva)} >Deletar</button>
+            <button className="btn_" color="secondary" onClick={this.toggle}>Fechar</button>
  
         </MDBModalFooter>
     </MDBModal>
