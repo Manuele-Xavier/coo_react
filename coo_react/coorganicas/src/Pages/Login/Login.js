@@ -170,7 +170,7 @@ class Login extends Component {
                                 <input type="text" placeholder="Usuario:" aria-label="Digitar o Usuario" name="Usuario"
                                     required value={this.state.login.email} onChange={this.AtualizaEstado}></input>
                                 <input type="text" placeholder="Senha:" aria-label="Digitar a Senha" name="Usuario" required vaue={this.state.login.senha} onChange={this.AtualizaEstado}></input>
-                                <button type="submit" class="btn_">Entrar</button>
+                                <button type="submit" className="btn_"><p>Entrar</p></button>
                                 <p className="t_login">Não possui cadastro? Inscreva-se</p>
 
                             </label>
@@ -243,7 +243,7 @@ class Login extends Component {
                             <input type="text" placeholder="Digite o CNPJ" aria-label="Digitar CNPJ" name="Cnpj" required
                                 className="in_login"  onChange={this.AtualizaEstado}></input>
                         </label>
-                        <button type="submit" class="btn_">Cadastrar</button>
+                        <button type="submit" className="btn_">Cadastrar</button>
 
 
                     </form>

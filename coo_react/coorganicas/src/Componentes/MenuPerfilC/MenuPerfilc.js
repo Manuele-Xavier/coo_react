@@ -5,9 +5,58 @@ import img_usuario2 from '../../Assets/images/casinha.png'
 
 
 class MenuPerfilC extends Component{
+
+    state = {
+        state: {
+          showNav: false
+        }
+      }
+
+
+      openNavClick = e => {
+        e.preventDefault()
+        this.openNav()
+      }
+    
+      closeNavClick = e => {
+        e.preventDefault()
+        this.closeNav()
+      }
+    
+      openNav = () => {
+        this.setState({
+          showNav: true
+        })
+    
+        document.addEventListener("keydown", this.handleEscKey)
+      }
+      closeNav = () => {
+        this.setState({
+          showNav: false
+        })
+    
+        document.removeEventListener("keydown", this.handleEscKey)
+      }
+    
+      handleEscKey = e => {
+        if (e.key === "Escape") {
+          this.closeNav()
+        }
+      }
+
     render(){
         return(
             // <div className="container_perfil">
+            <div>
+                 <span onClick={this.openNavClick} class="open-nav">
+                &#9776; open
+                </span>
+                <div
+             onClick={this.navCoverClick}
+            
+            
+            />
+           
             <div class="esquerdo">
             <nav className="menu_perfil">
                 <div>

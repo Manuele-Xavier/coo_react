@@ -4,18 +4,6 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 
 import '../../Assets/css/receitas.css'
 import img_receitas from '../../Assets/images/receita11.jpg';
-// import img_receitas2 from '../../Assets/images/receita3.jpg';
-// import img_receitas3 from '../../Assets/images/receita9.jpg';
-// import img_receitas4 from '../../Assets/images/receita7.jpg';
-// import img_receitas5 from '../../Assets/images/receita10.jpg';
-// import img_receitas6 from '../../Assets/images/receita14.jpg';
-// import img_receitas7 from '../../Assets/images/receita2.jpg';
-// import img_receitas8 from '../../Assets/images/receita19.jpg';
-// import img_receitas9 from '../../Assets/images/receita5.jpg';
-// import img_receitas10 from '../../Assets/images/receita6.jpg';
-// import img_receitas11 from '../../Assets/images/receita12.jpg';
-// import img_receitas12 from '../../Assets/images/receita13.jpg';
-
 import Header from '../../Componentes/Header/Header';
 import Footer from '../../Componentes/Footer/Footer';
 class Receitas extends Component {

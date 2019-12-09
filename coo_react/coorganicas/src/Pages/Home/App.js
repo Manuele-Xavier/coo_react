@@ -35,19 +35,7 @@ function App() {
                     </div>
 
                 </div>
-                {/* <!-- <div className="banner2">
-                    <div className="banner_title">Texto</div>
-                    <div className="banner_desc">
-                        Algum texto qualquer
-                    </div>
-                    
-                </div>
-                <div className="banner3">
-                    <div className="banner_title">Texto</div>
-                    <div className="banner_desc">
-                        Algum texto qualquer
-                    </div>
-                </div> --> */}
+                
             </div>
         </div>
     </section>

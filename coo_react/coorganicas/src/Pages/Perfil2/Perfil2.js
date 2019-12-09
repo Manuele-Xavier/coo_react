@@ -170,7 +170,7 @@ class Perfil2 extends Component{
                                
                                 return(
                                     <div className="products2" onClick={()=>this.MaisInformacoes(oferta)}>
-                                        <img src={oferta.produto.imagemProduto && require(`../../Assets/images/produtos/${oferta.produto.imagemProduto}`)} alt="teste"/>
+                                     {/* <img src={oferta.produto.imagemProduto && require(`../../Assets/images/produtos/${oferta.produto.imagemProduto}`)} alt="teste"/> */}
                                         <div className="espaco_inputi">
                                             <label>
                                                 <p>{oferta.descricao}</p>

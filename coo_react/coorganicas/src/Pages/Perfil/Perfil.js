@@ -108,6 +108,7 @@ class Perfil extends Component {
             <main>
                 <div className="container_perfil">
                     <MenuPerfilA/>
+                
                        
                     
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>

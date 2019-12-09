@@ -7,14 +7,14 @@
 .esquerdo{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    /* width: 30% !important; */
     font-size: 1.3em;
-    padding-top:20px ;
-    border-right: #BF0404 3px solid;
+    padding-top:20px !important;
+    border-right: #BF0404 3px solid !important;
     
   }
   .menu_perfil{
-    color: var(--cinza-fonte);
+    color: var(--cinza-fonte) ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,13 +30,13 @@
 }
 .menu_perfil p{
   text-decoration: none;
-  color: #707070;
-  font-size: 1.5em;
+  color: #707070 !important;
+  font-size: 1.5em !important;
   list-style: none;
-  padding-left: 10px;
+  padding-left: 10px !important;
 }
-.menu_perfil img{
-  width: 200px;
+.menu_perfil img {
+  width: 200px !important;
 }
 @media(max-width:1169px){
   .menu_perfil, .esquerdo{
