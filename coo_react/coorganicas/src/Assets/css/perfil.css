@@ -1,4 +1,10 @@
+.header_perfil{
+    width: 100%;
+    height: 80px;
+   padding: 30px 0px;
+  
 
+}
   .direito1{
       display: flex;
       justify-content: space-between;
@@ -30,7 +36,7 @@
     }
   .t_perfil{
       text-align: center;
-      padding-bottom: 30px;
+      padding: 55px 0px;
 
   }
   .select_cadastro{
@@ -47,6 +53,7 @@
     display: flex;
     flex-direction: column;
     width: 70%; 
+    margin: auto;
     
     
 }
@@ -140,6 +147,7 @@ box-shadow: 5px 5px 5px 0px rgba(204,204,204,1);
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 #form_receita{
     display: flex;

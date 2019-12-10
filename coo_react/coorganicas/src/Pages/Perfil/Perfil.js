@@ -4,6 +4,7 @@ import toastr from 'toastr';
 
 import '../../Assets/css/estilo.css'
 import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
+import logo from '../../Assets/images/logooriginal.png';
 
 toastr.options = {
     "closeButton": true,
@@ -106,6 +107,7 @@ class Perfil extends Component {
     render(){
         return(
             <main>
+               
                 <div className="container_perfil">
                     <MenuPerfilA/>
                 

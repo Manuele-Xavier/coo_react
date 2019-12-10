@@ -6,9 +6,26 @@ import Header from '../../Componentes/Header/Header';
 import Footer from '../../Componentes/Footer/Footer';
 import Axios from 'axios';
 import { parseJwt } from '../../Services/auth';
-import api from '../../Services/api';
+import toastr from 'toastr';
 
 
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "latestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "6000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 ////fazendo a componentização da página Login- Julia
 // import '../../css/login.css'
 
@@ -25,6 +42,7 @@ class Login extends Component {
             Endereco: '',  
             Numero: '',
             Telefone: '',
+            Cep:"",
             Cnpj: '',
             perfil : "",
             login:{
@@ -63,7 +81,7 @@ class Login extends Component {
             usuario.set("telefone",this.state.Telefone);
             usuario.set("cnpj",this.state.Cnpj);
             usuario.set("confirmarSenha", this.state.ConfirmarSenha); // Incluir na view do back confirmarsenha
-            usuario.set("cep", "02435000");
+            usuario.set("cep", this.state.Cep);
             usuario.set("tipoUsuarioId", this.state.perfil);
         
 
@@ -76,7 +94,9 @@ class Login extends Component {
         .then(response => response.json())
         .then(response => {
             // Caso retorne status code 200,
-            if (response.status === 200) {
+            console.log(response)
+            if (response.data) {
+                toastr.success("Cadastro efetuado com Sucesso!!");
                 // exibe no console do navegador a mensagem 'Evento cadastrado!'
                 console.log('Evento cadastrado!');
                 // e define que a requisição terminou
@@ -138,8 +158,7 @@ class Login extends Component {
           
       
     AtualizaEstado = (input) => {
-        console.log("Atuzalindo: ", [input.target.name])
-
+        console.log("Atuzalindo: ", [input.target.name])        
         this.setState({ [input.target.name] : input.target.value})
          //mostrando as atualizções 
         console.log(this.state.Cnpj)
@@ -183,8 +202,8 @@ class Login extends Component {
                         <div className="espaco">
                             <div className="radius">
                                 {/*os values estão com valores determinados pelo banco de dados */ }
-                                <input type="radio" name="perfil" className="btn_cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
-                                <input type="radio" name="perfil" className="btn_cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
+                                <input type="radio" name="perfil" className="btn_cadastro" value={3} required onChange={this.AtualizaEstado}/>Agricultor
+                                <input type="radio" name="perfil" className="btn_cadastro" value={2} required onChange={this.AtualizaEstado}/>Comunidade
                             </div>
                         </div>
 
@@ -224,14 +243,14 @@ class Login extends Component {
 
                             <label> <span className="c">Nº:</span>
 
-                                <input type="text" placeholder="" aria-label="Digite o numero" name="Numero"
+                                <input type="text" placeholder="Digite o numero" aria-label="Digite o numero" name="Numero"
                                     required className="in_loginn" onChange={this.AtualizaEstado}></input>
 
                             </label>
 
                         </label>
                         <label> <span>CEP:</span>
-                            <input type="text" placeholder="Digite o telefone" aria-label="Digite o telefone" name="Telefone"
+                            <input type="text" placeholder="Digite o Cep" aria-label="Digite o cep" name="Cep"
                                 required className="in_login"  onChange={this.AtualizaEstado}></input>
                         </label>
                         <label> <span>Telefone:</span>

@@ -4,13 +4,23 @@
     width: 100%;
     margin:auto;
 }
+.container_perfil div{
+  box-shadow: none !important;
+  background: none !important;
+  /* height: none !important; */
+  
+ 
+}
+
 .esquerdo{
     display: flex;
     flex-direction: column;
-    /* width: 30% !important; */
     font-size: 1.3em;
     padding-top:20px !important;
     border-right: #BF0404 3px solid !important;
+    width: 30vw;
+    background-color:#EFF3F6 !important;
+    height: 100% !important;
     
   }
   .menu_perfil{
@@ -20,7 +30,21 @@
     align-items: center;
     list-style: none;
     line-height: 4.0em; 
+    background-color:#EFF3F6 !important;
+    /* height: 100% !important; */
+    margin-top: -17px;
+   
+    
   }
+  #icon_font{
+    color: #BF0404;
+    
+    margin-left: 40px;
+    padding-top: 50px;
+
+    
+  }
+
   .ativo{
       border-left: solid 2px var(--vermelho) ;
       margin-left: 3px;
@@ -40,16 +64,22 @@
 }
 @media(max-width:1169px){
   .menu_perfil, .esquerdo{
-    display: none;
+    background-color:#EFF3F6;
+    
 }
 }
 
 /* celular */
 @media(max-width:845px){
-  .menu_perfil{
-    display: none;
-}
 .esquerdo{
-   display: none; 
+  width: 70vw !important;
+  background-color:#EFF3F6 !important;
+  margin-top: -58px;
+  
+
+}
+.menu_perfil{
+  background-color:#EFF3F6 !important;
+  margin-top: 40px;
 }
 }

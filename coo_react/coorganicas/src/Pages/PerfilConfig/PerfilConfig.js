@@ -40,7 +40,8 @@ toastr.options = {
                 nome:"",
                 email:"",
                 senha:"",
-                ConfirmaSenha : ""
+                ConfirmaSenha : "",
+                imagemUsuario: React.createRef()
             },
 
             erroMsg : "",
@@ -107,6 +108,17 @@ toastr.options = {
     // }
 
 
+    putSetStateFile = (input) =>{
+        this.setState({
+            putUsuario : {
+                ...this.state.putUsuario, [input.target.name] : input.target.files[0]
+            }   
+        })
+
+        console.log("Atulizou ", this.state.putUsuario.imagemUsuario )
+    }
+
+
     putUsuario=(event)=>{
         event.preventDefault();
         let usuario_id = 3;
@@ -119,16 +131,24 @@ toastr.options = {
         usuario.set("email",this.state.putUsuario.email)
         usuario.set("senha",this.state.putUsuario.senha)
         usuario.set("confirmarSenha",this.state.putUsuario.ConfirmaSenha)
+        usuario.set('imagemUsuario', this.state.putUsuario.imagemUsuario.current.files[0]);
 
         console.log(this.state.putUsuario.nome)
         console.log(this.state.putUsuario.email)
         console.log(this.state.putUsuario.senha)
         console.log(this.state.putUsuario.ConfirmaSenha)
+        console.log(this.state.putUsuario.imagemUsuario.current.files[0])
+
+        let config = {
+            headers: {                        
+                "Access-Control-Allow-Origin":"*" // Cors
+            }
+        }
 
         fetch('http://localhost:5000/api/Usuario/'+usuario_id,{
             method :"PUT",
             body: usuario
-        })
+        },config)
         .then(response=> response.json())
         .then((response) => {
             if(response.erro !== true){
@@ -146,23 +166,26 @@ toastr.options = {
         }, 3500);
     }
 
+    //post da imagem
+
+   
+
     render(){
         return(
             <div className="container_perfil">
                <MenuPerfilC/>
                 <form  id="form_cadastro_conf" onSubmit={this.putUsuario} onReset={this.limpaForm}>
-
-                    
-              
+                                             
+                            
                                     
-                                <h1 className="t_perfil">Editar minhas informações</h1>
+                            <h1 className="t_perfil">Editar minhas informações</h1>
 
 
                                 <div className="carde_receita">
                             <div className="tracado"><img src={img_perfil3} alt="Campo para inserir uma imagem"/></div>
                             <div className="btn_file_espaco">
                                 <label>
-                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..." id="img__inputt"/>
+                                    <input type="file" aria-label="Digite o seu nome" name="imagemUsuario" onChange={this.putSetStateFile} ref={this.state.putUsuario.imagemUsuario}  placeholder="Enviar arquivo..." id="img__inputt"/>
                                 </label>
                             </div>
                         </div>

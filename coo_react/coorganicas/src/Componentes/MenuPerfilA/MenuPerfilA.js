@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import img_usuario2 from '../../Assets/images/celeiro (1).svg'
 import Sidebar from "react-sidebar";
 
-const mql = window.matchMedia(`(min-width: 800px)`);
+// const mql = window.matchMedia(`(min-width: 800px)`);
+
 
 class MenuPerfilA extends Component {
 
@@ -13,14 +14,14 @@ class MenuPerfilA extends Component {
         this.state = {
             lista: [],
             Nome_Usuario: "",
-            
+            // sidebarDocked : mql . fósforos , 
             sidebarOpen: true
 
 
 
 
         }
-
+        // this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
 
@@ -28,6 +29,21 @@ class MenuPerfilA extends Component {
         this.setState({ sidebarOpen: open });
     }
 
+    // componentWillMount() {
+    //     mql.addListener(this.mediaQueryChanged);
+    //   }
+     
+    //   componentWillUnmount() {
+    //     this.state.mql.removeListener(this.mediaQueryChanged);
+    //   }
+     
+    //   onSetSidebarOpen(open) {
+    //     this.setState({ sidebarOpen: open });
+    //   }
+     
+    //   mediaQueryChanged() {
+    //     this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+    //   }
 
     mostrarNome = () => {
 
@@ -56,9 +72,11 @@ class MenuPerfilA extends Component {
 
     render() {
         return (
-            // <div className="container_perfil">
-            <Sidebar
+           
+            <Sidebar 
+            
                 sidebar={
+                    
                     <div class="esquerdo">
                     <nav className="menu_perfil">
 
@@ -91,11 +109,12 @@ class MenuPerfilA extends Component {
                 
             >
 
-                    <i class="fas fa-bars fa-2x" onClick={() => this.onSetSidebarOpen(true)} >
-                    
-                    </i>
+                   
+            <i class="fas fa-bars fa-3x" onClick={() => this.onSetSidebarOpen(true)} id="icon_font" ></i>
                
             </Sidebar>
+
+            
 
             
 
