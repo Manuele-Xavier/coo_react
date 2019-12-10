@@ -10,9 +10,11 @@ import Perfil from './Pages/Perfil/Perfil'
 import Perfil2 from './Pages/Perfil2/Perfil2'
 import Perfil3 from './Pages/Perfil3/Perfil3'
 import Perfil4 from './Pages/Perfil4/Perfil4'
+import Perfil5 from './Pages/Perfil5/Perfil5'
+import PerfilConfig from './Pages/PerfilConfig/PerfilConfig'
 import PerfilConfig2 from './Pages/PerfilConfig2/PerfilConfig2'
 import * as serviceWorker from './serviceWorker';
-import {Route,BrowserRouter as Router , Switch} from 'react-router-dom';
+import {Route,BrowserRouter as Router , Switch,Redirect} from 'react-router-dom';
 
 // Importamos o MDB React
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -24,6 +26,52 @@ import './Assets/css/index.css';
 import './Assets/css/receitas.css';
 
 import './Assets/css/toastr.css'
+
+import { usuarioAutenticado, parseJwt } from './Services/auth';
+
+
+
+const PermissaoAdmin = ({ component : Component}) =>(
+    <Route
+    render = {props =>
+        usuarioAutenticado()&& parseJwt().Role === "Administrador" ? (
+            <Component {...props} />
+        ):(
+            <Redirect to={{ pathname : "/login"}}/>
+        )
+
+    }
+
+    />
+)
+
+const PermissaoAgricultor = ({ component : Component}) =>(
+    <Route
+    render = {props =>
+        usuarioAutenticado()&& parseJwt().Role === "Agricultor" ? (
+            <Component {...props} />
+        ):(
+            <Redirect to={{ pathname : "/login"}}/>
+        )
+
+    }
+
+    />
+)
+const PermissaoComunidade = ({ component : Component}) =>(
+    <Route
+    render = {props =>
+        usuarioAutenticado()&& parseJwt().Role === "Comunidade" ? (
+            <Component {...props} />
+        ):(
+            <Redirect to={{ pathname : "/login"}}/>
+        )
+
+    }
+
+    />
+)
+
 
 
 
@@ -45,7 +93,9 @@ const Rotas= (
             <Route exact path ="/Perfil2" component={Perfil2}/>
             <Route exact path ="/Perfil3" component={Perfil3}/>
             <Route exact path ="/Perfil4" component={Perfil4}/>
+            <Route exact path ="/PerfilConfig" component={PerfilConfig}/>
             <Route exact path ="/PerfilConfig2" component={PerfilConfig2}/>
+            <Route exact path ="/Perfil5" component={Perfil5}/>
             
             </Switch>
             

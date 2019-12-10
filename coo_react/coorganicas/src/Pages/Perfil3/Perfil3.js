@@ -4,6 +4,7 @@ import img_perfil3 from '../../Assets/images/Agrupar 53.png'
 import '../../Assets/css/perfil.css'
 import '../../Assets/css/estilo.css'
 import '../../Assets/css/menuPerfil.css'
+import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 
 
 
@@ -35,12 +36,17 @@ class Perfil3 extends Component {
     mostrarReserva = () => {
 
 
-        fetch("http://localhost:5000/api/Reserva")
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ lista: data })
-                console.log(data)
-            })
+        fetch("http://localhost:5000/api/Reserva",{
+            method:"GET",           
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")                
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ lista: data })
+            console.log(data)
+        })
 
         //desabilita o icone apos dois segundos
 
@@ -59,7 +65,8 @@ class Perfil3 extends Component {
         fetch("http://localhost:5000/api/Reserva/"+id_Reserva, {
            method : "DELETE",
            headers : { 
-               "Content-Type" : "application/json"
+               "Content-Type" : "application/json",
+               'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")
            }
         })
         .then(response => response.json())
@@ -111,13 +118,11 @@ class Perfil3 extends Component {
         return(
 
             
-
+            
             <main>
                 
             <div className="container_perfil">
-            <div className="esquerdo">
-                        <nav className="menu_perfil"></nav>
-                    </div>
+            <MenuPerfilC/>
             
                 
                 
@@ -169,7 +174,7 @@ class Perfil3 extends Component {
                     
                 </div>
     
-            </div>
+           
 
             <MDBContainer>
 
@@ -197,6 +202,7 @@ class Perfil3 extends Component {
     </MDBModal>
 </form>
 </MDBContainer>
+</div>
         </main>
             
         );

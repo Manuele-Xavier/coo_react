@@ -31,7 +31,10 @@ class Perfil extends Component {
             lista: [],
             descricao: "",
             validade: "",
-            produto: "",
+
+            produto: "Selecione o Produto",
+            listaProduto : [],
+
             cidade: "",
             regiao: "",
             quantidade: "",
@@ -46,11 +49,11 @@ class Perfil extends Component {
         this.setState({
             descricao: "",
             validade: "",
-            produto: "",
+            produto: "Selecione o Produto",
             cidade: "",
             regiao: "",
             quantidade: "",
-            preco: ""
+            preco: ""            
             
         })
     }
@@ -79,7 +82,15 @@ class Perfil extends Component {
 
         };
 
-        Axios.post('https://localhost:5001/api/oferta', produto)
+        let config = {
+            headers: {
+                "Content-Type":"application/json",
+                // "Access-Control-Allow-Origin":"*",
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas") 
+            }
+        }
+
+        Axios.post('http://localhost:5000/api/Oferta', produto, config)
             .then(Response => {
 
                 if (Response.status === 200) {
@@ -96,11 +107,33 @@ class Perfil extends Component {
                 }
             })
             .catch(erro => {
-                toastr.error("Falha em cadastrar a Oferta")
+                toastr.error("Falha ao cadastrar a Oferta")
                 
             });
     }
+
+    // Após renderizar o componente
+    async componentDidMount() {
+        console.log("Carregado...");
+        this.ListarProdutos();
+        
+    }
+
+    async ListarProdutos() {
     
+        fetch("http://localhost:5000/api/produto")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ listaProduto : data });
+                console.log("Produtos: ", data);
+             })
+            .catch(error => console.log(error));       
+    }
+    
+    AtulizaProdutoId = (input) => {
+        this.setState({produto : input.target.value});
+    }
+
     // POST
 
     render(){
@@ -112,9 +145,18 @@ class Perfil extends Component {
                     
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>
                         <h1 className="t_perfil">Cadastrar produtos</h1>
-                        <label> <span>Produto</span>
-                            <input type="text" aria-label="Digite o Produto" name="produto" value={this.state.produto} required onChange={this.atualizaStateCampo.bind(this)}></input>
-                        </label>
+
+                        <select name="produto" class="select_cadastro" aria-label="Digite o Produto" onChange={this.AtulizaProdutoId} value={this.state.produto}>
+                            <option value="Selecione o Produto" disabled>Selecione o Produto</option>
+                            {
+                                this.state.listaProduto.map(function(produto){
+                                    return (
+                                        <option key={produto.produtoId} value={produto.produtoId}>{produto.nome}</option>
+                                    );
+                                })   
+                            }
+                        </select><br/>
+                       
                         <label> <span>Cidade</span>
                             <input type="text" aria-label="Digite sua Cidade" name="cidade" value={this.state.cidade} required onChange={this.atualizaStateCampo.bind(this)}></input>
                         </label>

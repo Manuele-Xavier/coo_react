@@ -234,7 +234,7 @@ class Produto extends Component {
               Obj.quantidade = oferta.quantidade.toFixed(3) + " Kg";
               Obj.validade = new Intl.DateTimeFormat('pt-BR', options).format(Date.parse(oferta.validade))
               Obj.cooperativa = oferta.usuario.nome;
-              Obj.contato = Telefone;
+              Obj.contato = Telefone ? Telefone : "Sem Telefone";
 
               OfertaFiltrada.push(Obj);
             }
@@ -274,7 +274,7 @@ class Produto extends Component {
       let config = {
             headers: {
                 "Content-Type":"application/json",
-                "Access-Control-Allow-Origin":"*" // Cors
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas")
             }
         }
         console.log("valor", this.state.value)
@@ -453,7 +453,7 @@ class Produto extends Component {
                  Obj.quantidade = oferta.quantidade.toFixed(3) + " Kg";
                  Obj.validade = new Intl.DateTimeFormat('pt-BR', options).format(Date.parse(oferta.validade))
                  Obj.cooperativa = Coooperativa;//oferta.usuario.nome;
-                 Obj.contato = Telefone;
+                 Obj.contato = Telefone ? Telefone : "Sem telefone";
    
                  OfertaFiltrada.push(Obj);
                  //this.setState({ListaOferta : ""})

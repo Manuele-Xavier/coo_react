@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import Axios from 'axios';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import toastr from 'toastr';
+import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
+import { parseJwt } from '../../Services/auth';
 
 
 toastr.options = {
@@ -56,22 +58,44 @@ class Perfil2 extends Component{
         });
         this.BuscarMeusProdutos()
       }
+      
 
 
     BuscarMeusProdutos (){
-        Axios.get('http://localhost:5000/api/Oferta')
+
+        // var id=parseJwt().Id
+        // console.log(id)
+        console.log("Tok " + localStorage.getItem("user-coorganicas"))
+        
+        let config = {
+            headers: {
+                "Content-Type":"application/json",
+                // "Access-Control-Allow-Origin":"*",
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas") 
+            }
+        }
+
+
+        Axios.get('http://localhost:5000/api/Oferta/meusprodutos',config)
         .then(response=> {
             if(response.status === 200){
-                this.setState({listaProdutos : response.data});
+                    
+                    this.setState({listaProdutos : response.data});
+                
+                
                // console.log(this.state.listaProdutos);
 
             };
         })
+
+        
+
     }
 
 
     componentDidMount(){
         this.BuscarMeusProdutos();
+        
     }
 
     MaisInformacoes=(oferta)=>{
@@ -113,10 +137,15 @@ class Perfil2 extends Component{
         console.log(this.state.InformacoesOferta.preco)
         console.log(this.state.InformacoesOferta.quantidade)
         console.log(this.state.InformacoesOferta.produto)
+        console.log(localStorage.getItem("user-coorganicas"))
 
         fetch('http://localhost:5000/api/Oferta/'+oferta_id,{
-            method:"PUT",
-            body: usuario
+            method:"PUT",           
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")                
+            },
+            body: usuario          
+
         })
         .then(response=>response.json())
         .then((response) => {
@@ -132,17 +161,26 @@ class Perfil2 extends Component{
     }
 
     DeletarOferta(oferta){
-        let oferta_id=this.state.InformacoesOferta.ofertaid
 
-        Axios.delete('http://localhost:5000/api/Oferta/'+oferta_id)
-        .then(response=>{
+        let config = {
+            headers: {
+                "Content-Type":"application/json",
+                // "Access-Control-Allow-Origin":"*",
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas") 
+            }
+        }
+
+        let oferta_id = this.state.InformacoesOferta.ofertaid
+
+        Axios.delete('http://localhost:5000/api/Oferta/'+oferta_id, config)
+        .then(response => {
             if(response.status===200){
                 if(response.erro !== true){
                     toastr.success("Oferta deletada com sucesso"); //error warning
                     this.toggle();
                 }
             }
-        }).catch(error=>{
+        }).catch(error => {
             toastr.error("Falha em deletar a oferta pois ja está reservada")
         })
         
@@ -159,9 +197,8 @@ class Perfil2 extends Component{
             
             <main className="mobile">
                 <div className="container_perfil">
-                <div className="esquerdo">
-                    {/* <MenuPerfil></MenuPerfil> */}
-                </div> 
+                    <MenuPerfilA/>
+                
                     <div className="direito2">
                         <h1 className="t_perfil">Minhas Ofertas</h1>
                         <div method="GET" id="form_meusprodutos" className="products" >
@@ -218,7 +255,7 @@ class Perfil2 extends Component{
                     </label>
 
                     <label> <span>Quantidade: </span>
-                        <input type="number"aria-label="Digite a Quantidade"name="quantidade"   value={this.state.InformacoesOferta.quantidade} onChange={this.putSetState}></input>
+                        <input type="number"aria-label="Digite a Quantidade"name="quantidade" step={0.500} value={this.state.InformacoesOferta.quantidade} onChange={this.putSetState}></input>
                     </label> 
 
                     <label> <span>Preço por Kg: </span>

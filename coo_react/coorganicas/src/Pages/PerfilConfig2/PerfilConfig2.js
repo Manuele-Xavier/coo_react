@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import Axios from 'axios';
 // import { bindExpression } from '@babel/types';
 import toastr from 'toastr';
+import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
+import { parseJwt } from '../../Services/auth';
 
 
 
@@ -33,7 +35,7 @@ toastr.options = {
         super()
         this.state={
             putUsuario:{
-                usuarioId:3,
+                usuarioId:"",
                 nome:"",
                 email:"",
                 senha:"",
@@ -56,18 +58,20 @@ toastr.options = {
               "Access-Control-Allow-Origin":"*" // Cors
           }
         }
+        var id=parseJwt().Id
+        console.log(id)
         
-       Axios.get(`http://localhost:5000/api/Usuario/` + this.state.putUsuario.usuarioId, config)
+       Axios.get(`http://localhost:5000/api/Usuario/` + id, config)
         .then(response => {        
           this.setState({putUsuario : {
-            ...this.state.putUsuario, 
+            ...this.state.putUsuario,
             nome : response.data.nome,
             email : response.data.email,
             senha : response.data.senha,
             ConfirmaSenha : response.data.senha
           }});
           
-          console.log("Nome: ", this.state.putUsuario.usuarioId);
+          console.log("Nome: ", this.state.putUsuario.UsuarioId);
         })
         .catch(error => {
           console.log(error);
@@ -106,12 +110,12 @@ toastr.options = {
 
     putUsuario=(event)=>{
         event.preventDefault();
-        let usuario_id = 3;
+        let usuario_id = this.state.putUsuario.usuarioId;
         // let usuario_alterado = this.state.putUsuario
         let usuario = new FormData();
 
         // Arrumar os states para poder mandar corretamente os dados e ver o que está acontecendo com a view
-        usuario.set("usuarioId",3)
+        usuario.set("usuarioId",this.state.putUsuario.usuarioId)
         usuario.set("nome",this.state.putUsuario.nome)
         usuario.set("email",this.state.putUsuario.email)
         usuario.set("senha",this.state.putUsuario.senha)
@@ -146,6 +150,7 @@ toastr.options = {
     render(){
         return(
             <div className="container_perfil">
+                <MenuPerfilA/>
                 <form  id="form_cadastro_conf" onSubmit={this.putUsuario} onReset={this.limpaForm}>
               
                                     
