@@ -43,7 +43,7 @@ class Header extends Component{
                             
                             {usuarioAutenticado() && parseJwt().Role === "Administrador" ?(
                                     <>
-                                    <Link to='/Perfil5' title="Perfil do Admnistrador" >Perfil
+                                    <Link to='/Perfil6' title="Perfil do Administrador" >Perfil
                                      </Link>
                                      <a onClick={this.logout}>Sair</a>
                                      </>

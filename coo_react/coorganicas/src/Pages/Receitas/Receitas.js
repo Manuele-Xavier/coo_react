@@ -95,10 +95,11 @@ class Receitas extends Component {
         return (
 
 
-            <div className="postscontainer">
+            
                 
-
+                <div>
                 <Header />
+                <div className="postscontainer">
                 <h1 className="tituloposts1">Receitas</h1>
                 <div className="flexposts">
                 {
@@ -177,9 +178,10 @@ class Receitas extends Component {
                     </form>
                 </MDBContainer>
 
-
+                </div>
                 <Footer />
-            </div>
+                </div>
+            
 
 
 

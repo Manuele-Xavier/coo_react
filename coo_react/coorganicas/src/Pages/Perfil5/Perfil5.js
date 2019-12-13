@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ImgCadastroProduto from '../../Assets/images/photo.svg';
 import toastr from 'toastr';
+import PerfilAdm from '../PerfilAdm/PerfilAdm';
 
 
 toastr.options = {
@@ -29,7 +30,7 @@ class Perfil5 extends Component {
         super(props);
         this.state = {
             nome: "",
-            imagemProduto: React.createRef(),
+            imagemProduto : React.createRef(),
 
             loading: false,
             erroMsg: "",
@@ -61,17 +62,23 @@ class Perfil5 extends Component {
         console.log(this.state.nome)
         console.log(this.state.imagemProduto)
 
-        let config = {
-            headers: {
-                "Content-Type":"application/json",
-                "Access-Control-Allow-Origin":"*" // Cors
-            }
-        }
+        // let config = {
+        //     headers: {
+        //         "Content-Type":"application/json",
+        //         "Access-Control-Allow-Origin":"*",
+        //         'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")        // Cors
+        //     }
+        // }
         
         fetch('http://localhost:5000/api/Produto', {
             method: "POST",
+            headers:{
+                // "Content-Type":"application/json",
+                "Access-Control-Allow-Origin":"*",
+                'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas") 
+            },
             body: produto
-        }, config)        
+        })        
         .then(Response => Response.json())
         .then((Response) => {
             console.log("resp", Response)
@@ -95,6 +102,7 @@ class Perfil5 extends Component {
     render() {
         return (
             <div className="container_perfil">
+                <PerfilAdm/>
                 <div className="direito3">
                     <h1 className="t_perfil">Cadastrar Produtos</h1>
                     <form  id="form_receita" onSubmit={this.CadastrarProduto} onReset={this.limpaForm}>

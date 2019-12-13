@@ -144,7 +144,7 @@ class Perfil extends Component {
                        
                     
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>
-                        <h1 className="t_perfil">Cadastrar produtos</h1>
+                        <h1 className="t_perfil">Cadastrar Oferta</h1>
 
                         <select name="produto" class="select_cadastro" aria-label="Digite o Produto" onChange={this.AtulizaProdutoId} value={this.state.produto}>
                             <option value="Selecione o Produto" disabled>Selecione o Produto</option>

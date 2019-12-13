@@ -1,3 +1,4 @@
+
 .container_rodape {
     width: 1000px;
     margin: auto;
@@ -89,12 +90,12 @@ footer h3{
 /* celular */
 @media(max-width:845px){
     .container_rodape {
-        width: 350px;
+        width: 50px;
         display: flex;
         justify-content: center;
     }
 
-    .container_rodape h3 {
+    .container_rodape h3, p  {
         text-align: center;
     }
 
@@ -102,13 +103,18 @@ footer h3{
         padding-top: 30px;
     }
 
-    .redes_sociais {
-        padding-left: 25px;
+    .contatos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+       
         
     }
 
-    .projeto p {
-        padding-left:60px; 
+    .telefone{
+        display: flex;
+        justify-content: center;
+        padding: 0;
     }
     /****** Rodapé  */
 

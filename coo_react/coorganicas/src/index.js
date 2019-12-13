@@ -11,6 +11,7 @@ import Perfil2 from './Pages/Perfil2/Perfil2'
 import Perfil3 from './Pages/Perfil3/Perfil3'
 import Perfil4 from './Pages/Perfil4/Perfil4'
 import Perfil5 from './Pages/Perfil5/Perfil5'
+import Perfil6 from './Pages/Perfil6/Perfil6'
 import PerfilConfig from './Pages/PerfilConfig/PerfilConfig'
 import PerfilConfig2 from './Pages/PerfilConfig2/PerfilConfig2'
 import * as serviceWorker from './serviceWorker';
@@ -24,7 +25,7 @@ import 'mdbreact/dist/css/mdb.css';
 import './Assets/css/estilo.css';
 import './Assets/css/index.css';
 import './Assets/css/receitas.css';
-
+import './Assets/css/perfil.css';
 import './Assets/css/toastr.css'
 
 import { usuarioAutenticado, parseJwt } from './Services/auth';
@@ -96,6 +97,7 @@ const Rotas= (
             <Route exact path ="/PerfilConfig" component={PerfilConfig}/>
             <Route exact path ="/PerfilConfig2" component={PerfilConfig2}/>
             <Route exact path ="/Perfil5" component={Perfil5}/>
+            <Route exact path ="/Perfil6" component={Perfil6}/>
             
             </Switch>
             

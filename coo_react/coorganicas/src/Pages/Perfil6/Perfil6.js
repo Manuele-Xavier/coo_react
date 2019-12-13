@@ -3,8 +3,8 @@ import React,{Component} from 'react';
 import Axios from 'axios';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import toastr from 'toastr';
-import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
 import { parseJwt } from '../../Services/auth';
+import PerfilAdm from '../PerfilAdm/PerfilAdm';
 
 
 toastr.options = {
@@ -30,23 +30,17 @@ toastr.options = {
 
 
 
-class Perfil2 extends Component{
+class Perfil6 extends Component{
 
     constructor(){
         super();
         this.state = {
             listaProdutos : [],
             modal: false,
-
-            InformacoesOferta : {
-                preco : "",
-                ofertaid:"",
-                cidade :"",
-                validade :"",
-                quantidade :"",
-                regiao :"",
-                descricao:"",
-                produto :""
+            produto : {
+                nome : "",
+                produtoid : "",
+                imagemProduto : React.createRef()  
             }
 
         }
@@ -76,7 +70,7 @@ class Perfil2 extends Component{
         }
 
 
-        Axios.get('http://localhost:5000/api/Oferta/meusprodutos',config)
+        Axios.get('http://localhost:5000/api/Produto',config)
         .then(response=> {
             if(response.status === 200){
                     
@@ -98,59 +92,56 @@ class Perfil2 extends Component{
         
     }
 
-    MaisInformacoes=(oferta)=>{
+    MaisInformacoes=(produto)=>{
         this.toggle()
         
         
-        this.setState({InformacoesOferta :{
-            preco : oferta.preco,
-            cidade : oferta.cidade,
-            validade : oferta.validade,
-            quantidade : oferta.quantidade,
-            regiao : oferta.regiao,
-            descricao : oferta.descricao,
-            produto : oferta.produto.nome, 
-            ofertaid : oferta.ofertaId
+        this.setState({produto :{
+            nome : produto.nome, 
+            produtoid : produto.produtoId,
+            imagemProduto: React.createRef()
         }})
 
         
 
-        console.log(oferta)
+        console.log(produto)
     }
 
     putSetState=(input)=>{
         this.setState({
-            InformacoesOferta :{
-                ...this.state.InformacoesOferta, [input.target.name] : input.target.value
+            produto :{
+                ...this.state.produto, [input.target.name] : input.target.value
             }
         })
     }
 
-    AtulizaQuantidade = (input) => {
+    putSetStateFile = (input) =>{
         this.setState({
-            InformacoesOferta :{
-                ...this.state.InformacoesOferta, [input.target.name] : parseFloat(input.target.value)
-            }
+            produto : {
+                ...this.state.produto, [input.target.name] : input.target.files[0]
+            }   
         })
-        
+
+        console.log("Atualizou ", this.state.produto.imagemProduto )
     }
     
     AlteraInfo=(event)=>{
         event.preventDefault();
-        let oferta_id = this.state.InformacoesOferta.ofertaid;
+        let produto_id=this.state.produto.produtoid;
         let usuario = new FormData();
-        usuario.set("preco", this.state.InformacoesOferta.preco)
-        usuario.set("quantidade", this.state.InformacoesOferta.quantidade)
-        usuario.set("descricao", this.state.InformacoesOferta.descricao)
-
-        console.log(this.state.InformacoesOferta.preco)
-        console.log(this.state.InformacoesOferta.quantidade)
-        console.log(this.state.InformacoesOferta.produto)
+        usuario.set("nome",this.state.produto.nome)
+        usuario.set("produtoId",this.state.produto.produtoid)
+        usuario.set('imagemProduto', this.state.produto.imagemProduto.current.files[0])
+        console.log(this.state.produto.nome)
+        console.log(this.state.produto.imagemProduto)
         console.log(localStorage.getItem("user-coorganicas"))
+        console.log(produto_id)
+        console.log(usuario)
 
-        fetch('http://localhost:5000/api/Oferta/'+oferta_id,{
+        fetch('http://localhost:5000/api/Produto/'+produto_id,{
             method:"PUT",           
             headers: {
+                // "Content-Type":"application/json",
                 'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")                
             },
             body: usuario          
@@ -169,7 +160,7 @@ class Perfil2 extends Component{
         
     }
 
-    DeletarOferta(oferta){
+    DeletarOferta(produto){
 
         let config = {
             headers: {
@@ -179,9 +170,10 @@ class Perfil2 extends Component{
             }
         }
 
-        let oferta_id = this.state.InformacoesOferta.ofertaid
+        let produto_id=this.state.produto.produtoid;
 
-        Axios.delete('http://localhost:5000/api/Oferta/'+oferta_id, config)
+
+        Axios.delete('http://localhost:5000/api/Produto/'+produto_id, config)
         .then(response => {
             if(response.status===200){
                 if(response.erro !== true){
@@ -190,46 +182,48 @@ class Perfil2 extends Component{
                 }
             }
         }).catch(error => {
-            toastr.error("Falha em deletar a oferta pois ja está reservada")
+            toastr.error("Falha em deletar o produto pois ja está reservada")
         })
         
     }
+
+
+
+
+
 
 
     render(){
         return( 
             
             <main className="mobile">
+                
                 <div className="container_perfil">
-                    <MenuPerfilA/>
+                <PerfilAdm/>
                 
                     <div className="direito2">
-                        <h1 className="t_perfil">Minhas Ofertas</h1>
+                        <h1 className="t_perfil">Meus Produtos</h1>
                         <div method="GET" id="form_meusprodutos" className="products" >
                             
                         {
-                            this.state.listaProdutos.map(function(oferta) { 
+                            this.state.listaProdutos.map(function(produto) { 
                                
                                 return(
-                                    <div className="products2" onClick={()=>this.MaisInformacoes(oferta)}>
-                                        <img src={oferta.produto.imagemProduto && require(`../../Assets/images/produtos/${oferta.produto.imagemProduto}`)} alt="teste"/>
+                                    <div className="products2" onClick={()=>this.MaisInformacoes(produto)}>
+                                        <img src={produto.imagemProduto && require(`../../Assets/images/produtos/${produto.imagemProduto}`)} alt="teste"/>
                                         <div className="espaco_inputi">
                                             <label>
-                                                <p>{oferta.descricao}</p>
+                                                <p>{produto.nome}</p>
                                             </label>
                                         </div>
                                     </div>
                                 )
                             }.bind(this))
                         }
-                                
-                            
-                            
-
                         </div>
 
                         
-                    </div>  
+                     
                 
                 
                 
@@ -238,44 +232,25 @@ class Perfil2 extends Component{
             <form onSubmit={this.AlteraInfo}>
             <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
               <MDBModalHeader toggle={this.toggle}> Informações da sua Oferta:</MDBModalHeader>
-              <MDBModalBody>
+              <MDBModalBody>  
+                  <label>
+              <input type="file" aria-label="Escolha sua imagem" name="imagemProduto" onChange={this.putSetStateFile} ref={this.state.produto.imagemProduto}  placeholder="Enviar arquivo..." className="img__inputt"/>
+                  </label>
                 <label> <span>Produto: </span>
-                        <input type="text" aria-label="Digite sua Região" name= "produto" readOnly value= {this.state.InformacoesOferta.produto} ></input>
+                        <input type="text" aria-label="Nome do produto" name = "nome"  value= {this.state.produto.nome} onChange={this.putSetState} ></input>
                     </label> 
-                <label> <span>Cidade: </span>
-                        <input type="text"  aria-label="Digite sua Cidade" name="cidade" readOnly value= {this.state.InformacoesOferta.cidade} ></input>
-                    </label> 
-
-                    <label> <span>Região: </span>
-                        <input type="e-mail" aria-label="Digite sua Região" name= "regiao" readOnly value= {this.state.InformacoesOferta.regiao} ></input>
-                    </label> 
-
-                    <label> <span>Validade: </span>
-                        <input type="text" aria-label="Digite a sua Validade" name="validade" readOnly value={this.state.InformacoesOferta.validade} ></input>
-                    </label> 
-
-                    <label> <span>Descrição: </span>
-                        <input type="text" aria-label="Digite a descrição do produto" name="descricao"  value={this.state.InformacoesOferta.descricao} onChange={this.putSetState} ></input>
-                    </label>
-
-                    <label> <span>Quantidade: </span>
-                        <input type="number"aria-label="Digite a Quantidade"name="quantidade" value={this.state.InformacoesOferta.quantidade} onChange={this.AtulizaQuantidade}></input>
-                    </label> 
-
-                    <label> <span>Preço por Kg: </span>
-                        <input type="number" aria-label="Digite o Preco"name="preco"  value={this.state.InformacoesOferta.preco} onChange={this.putSetState} ></input>
-                    </label>
-               
               </MDBModalBody>
               <MDBModalFooter>
                 <MDBBtn color="secondary" Class= "btn1" onClick={this.toggle} >Fechar</MDBBtn>
                 <MDBBtn color="primary" Class= "btn2" type="submit">Alterar</MDBBtn>
-                <MDBBtn color="primary"  Class= "btn_" onClick={()=>this.DeletarOferta(this.state.InformacoesOferta)}>Deletar</MDBBtn>
+                <MDBBtn color="primary"  Class= "btn_" onClick={()=>this.DeletarOferta(this.state.produto)}>Deletar</MDBBtn>
               </MDBModalFooter>
             </MDBModal>
             </form>
           </MDBContainer>
+          </div> 
           </div>
+
           </main>
          
           
@@ -285,4 +260,4 @@ class Perfil2 extends Component{
         )
     }
 }
-export default Perfil2;
+export default Perfil6

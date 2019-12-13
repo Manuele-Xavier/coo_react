@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import '../../Assets/css/estilo.css';
 import '../../Assets/css/login.css';
 import Header from '../../Componentes/Header/Header';
@@ -7,6 +6,26 @@ import Footer from '../../Componentes/Footer/Footer';
 // import Axios from 'axios';
 import { parseJwt } from '../../Services/auth';
 import api from '../../Services/api';
+import toastr from 'toastr';
+
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "latestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "6000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 
 
 ////fazendo a componentização da página Login- Julia
@@ -26,18 +45,20 @@ class Login extends Component {
             Endereco: '',  
             Numero: '',
             Telefone: '',
+            Cep:"",
             Cnpj: '',
             perfil : "",
-            isLoading: false,
-            userId:""
-
+            user:'',
+            code:'',
+            erro : false,
+            mensagemErro : "",
         };
     };
 
     // POST !
     CadastrarCooperativa = (event) => {
         event.preventDefault();
-        this.setState({ isLoading: true});
+        //this.setState({ isLoading: true});
 
          // Declara um objeto do tipo FormData, já que o Backend recebe este tipo.
          let usuario = new FormData();
@@ -62,28 +83,51 @@ class Login extends Component {
             usuario.set("telefone",this.state.Telefone);
             usuario.set("cnpj",this.state.Cnpj);
             usuario.set("confirmarSenha", this.state.ConfirmarSenha); // Incluir na view do back confirmarsenha
-            usuario.set("cep", "02435000");
+            usuario.set("cep", this.state.Cep);
             usuario.set("tipoUsuarioId", this.state.perfil);
         
 
-       
-        // Define a URL e o corpo da requisição
-        fetch('http://localhost:5000/api/usuario', {
-            method: "POST",
+       try {
+           
+           // Define a URL e o corpo da requisição
+           fetch('http://localhost:5000/api/usuario', {
+               method: "POST", 
+               headers: {
+                   // "Content-Type":"application/json",// Cors,
+                   'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas"),
+                   "Access-Control-Allow-Origin":"*"
+            },
             body: usuario,
         })
-        .then(response => response.json())
         .then(response => {
-            // Caso retorne status code 200,
+            response.json();
             if (response.status === 200) {
-                // exibe no console do navegador a mensagem 'Evento cadastrado!'
-                console.log('Evento cadastrado!');
-                // e define que a requisição terminou
-                this.setState({ isLoading : false });
-            };
+                        toastr.success("Cadastro efetuado com Sucesso!!");
+                        // exibe no console do navegador a mensagem 'Evento cadastrado!'
+                        console.log('Evento cadastrado!');
+                        // e define que a requisição terminou
+                        //this.setState({ isLoading : false });
+                    }else{
+                        toastr.error("Erro ao cadastrar!!!!");
+                        this.setState({erro : true})
+                        this.setState({mensagemErro : response.data.mensagem})
+                    }
         })
-        .catch(error => console.log('Não foi possível cadastrar:' + error))
-
+        // .then(response => {
+            //     // Caso retorne status code 200,
+            //     if (response.status === 200) {
+                //         toastr.success("Cadastro efetuado com Sucesso!!");
+                //         // exibe no console do navegador a mensagem 'Evento cadastrado!'
+                //         console.log('Evento cadastrado!');
+                //         // e define que a requisição terminou
+                //         this.setState({ isLoading : false });
+                //     }
+                // })
+                .catch(error => console.log('Não foi possível cadastrar:' + error))
+                
+            } catch (error) {
+                alert(error);
+            }
 
     };
 
@@ -91,10 +135,10 @@ class Login extends Component {
         event.preventDefault();
         
         let user=new FormData();
-        user.set("email",this.state.Email)
-        user.set("senha",this.state.Senha)
-        console.log(this.state.Email)
-        console.log(this.state.Senha)
+        user.set("email",this.state.user)
+        user.set("senha",this.state.code)
+        // console.log(this.state.login.email)
+        // console.log(this.state.login.senha)
         
 
         api.post('/login',user)
@@ -106,37 +150,46 @@ class Login extends Component {
         //caso a requisição retorne um status code 200
         //sarvar o token no localstorage
         //e define que a requiseição terminou
-        if (response.status === 200) { 
-          localStorage.setItem('user-coorganicas', response.data.token)
+        if (response.data.erro !== true) { 
+
+            localStorage.setItem('user-coorganicas', response.data.token);
           
-          this.setState({ isLoading: false })
-          //define base 64 recebendo o payload do token
-          var base64 = localStorage.getItem('user-coorganicas').split('.')[1]
-          console.log(base64)
+            // this.setState({ isLoading: false })
+            // //define base 64 recebendo o payload do token
+            // var base64 = localStorage.getItem('user-coorganicas').split('.')[1]
+            // console.log(base64)
 
-          //exibe valor convertido para string
-          console.log(window.atob(base64))
+            // //exibe valor convertido para string
+            // console.log(window.atob(base64))
 
-          //exibe valor convertido pra json
-          console.log(JSON.parse(window.atob(base64)))
+            // //exibe valor convertido pra json
+            // console.log(JSON.parse(window.atob(base64)))
 
-          //exibe no console o tipo de usuario logado
-          console.log(parseJwt().Role)
+            // //exibe no console o tipo de usuario logado
+            // console.log(parseJwt().Role)
 
-          console.log(parseJwt().Id)
+            // console.log(parseJwt().Id)
 
-          if (parseJwt().Role === 'Administrador') {
-            this.props.history.push('/')
-          } else {
-            this.props.history.push('/')
-          }
+            if(parseJwt().Role === 'Administrador') {
+                this.props.history.push('/Perfil6')
+            }
+            else if(parseJwt().Role === 'Comunidade') {
+                this.props.history.push('/Perfil4');
+            }
+            else {
+                this.props.history.push('/Perfil2');
+            }
+
+        } else {
+            toastr.info("E-mail ou senha incorreto!"); 
         }
 
         })
         .catch(erro => {
             console.log("Erro: ", erro)
-            this.setState({ erroMensagem: 'E-mail ou senha inválidos!' })
-            this.setState({ isLoading: false })
+            //this.setState({ erroMensagem: 'E-mail ou senha inválidos!' })
+            //this.setState({ isLoading: false })
+            toastr.eroor("Erro ao efetuar o login!");
           })
    
     }
@@ -144,18 +197,21 @@ class Login extends Component {
           
       
     AtualizaEstado = (input) => {
-        console.log("Atualizando: ", [input.target.name])
+        // console.log("Atualizando: ", [input.target.name])
 
         this.setState({ [input.target.name] : input.target.value})
          //mostrando as atualizções 
-        // console.log(this.state.Cnpj)
-        // console.log(this.state.perfil) 
-        // console.log(this.state.RazaoSocial)
+        console.log(this.state.Cnpj)
+        console.log(this.state.perfil) 
+        console.log(this.state.RazaoSocial)
+        console.log(this.state.user)
+        console.log(this.state.code)
+        console.log(this.state.Cep)  
+        console.log(this.state.Cidade)
+        console.log(this.state.Endereco)
+        console.log(this.state.Numero)
         console.log(this.state.Email)
-        console.log(this.state.Senha)  
-        // console.log(this.state.Cidade)
-        // console.log(this.state.Endereco)
-        // console.log(this.state.Numero)
+        console.log(this.state.Senha)
     }
      
       
@@ -169,14 +225,16 @@ class Login extends Component {
               <Header/>
             <main className="banner_login">
                 
+        {this.state.erro == false? null : <p>Erro : {this.state.mensagemErro}</p>}
+
                 <div className="cotaniner_login">
                     <div className="espaco_entrar">
                         <form method="GET" id="form_usuario" className="entrar_login" onSubmit={this.fazerLogin}>
                             <label>
-                                <input type="text" placeholder="Email:" aria-label="Digitar o E-mail" name="Email"
-                                    required value={this.state.Email} onChange={this.AtualizaEstado}></input>
-                                <input type="password" placeholder="Senha:" aria-label="Digitar a Senha" name="Senha" required value={this.state.Senha} onChange={this.AtualizaEstado}></input>
-                                <button type="submit" class="btn_" type="submit">Entrar</button>
+                                <input type="text" placeholder="Email:" aria-label="Digitar o E-mail" name="user"
+                                    required value={this.state.user} onChange={this.AtualizaEstado}></input>
+                                <input type="password" placeholder="Senha:" aria-label="Digitar a Senha" name="code" required value={this.state.code} onChange={this.AtualizaEstado} className="input_senha"></input>
+                                <div className="espaco_btn_login"><button type="submit" className="btn_" ><p>Entrar</p></button> </div>
                                 <p className="t_login">Não possui cadastro? Inscreva-se</p>
 
                             </label>
@@ -196,60 +254,62 @@ class Login extends Component {
 
                         <label> <span>Razão Social</span>
                             <input type="text" placeholder="Digite o seu nome" aria-label="Digitar o  seu nome " name="RazaoSocial" 
-                                required className="in_login" onChange={this.AtualizaEstado}></input> {/*precisa colocar o " onChange={this.AtualizaEstado} {/*os names precisam estar iguais as declarações do constructor*/}
+                                 className="in_login" value={this.state.RazaoSocial} onChange={this.AtualizaEstado}></input> {/*precisa colocar o " onChange={this.AtualizaEstado} {/*os names precisam estar iguais as declarações do constructor*/}
                         </label>
 
                     
                         <label> <span>E-mail:</span>
                             <input type="text" placeholder="Digite o seu e-mail" aria-label="Digitar o seu e-mail" name="Email"
-                                required className="in_login" onChange={this.AtualizaEstado}></input>
+                                required className="in_login" value={this.state.Email} onChange={this.AtualizaEstado}></input>
                         </label>
                         <label> <span>Confirmar e-mail:</span>
                             <input type="text" placeholder="Confirme o seu e-mail" aria-label="Digitar o seu e-mail"
-                                name="Email" required  className="in_login" onChange={this.AtualizaEstado}></input>
+                                name="Email" required  className="in_login" value={this.state.Email} onChange={this.AtualizaEstado}></input>
 
                         </label>
                         <label> <span>Senha:</span>
                             <input type="text" placeholder=" Digite a senha" aria-label="Digitar a senha" name="Senha" required
-                                className="in_login" onChange={this.AtualizaEstado}></input>
+                                className="in_login" value={this.state.Senha} onChange={this.AtualizaEstado}></input>
                         </label>
 
                         <label> <span>Confirmar senha:</span>
 
                             <input type="text" placeholder="Confirmar senha" aria-label="Confirmar a senha"
-                                name="ConfirmarSenha" required className="in_login" onChange={this.AtualizaEstado}></input>
+                                name="ConfirmarSenha" required className="in_login" value={this.state.ConfirmarSenha} onChange={this.AtualizaEstado}></input>
                         </label>
                         <label> <span>Cidade:</span>
                             <input type="text" placeholder="Digite a cidade" aria-label="Digitar a cidade" name="Cidade"
-                                required className="in_login"  onChange={this.AtualizaEstado}></input>
+                                required className="in_login" value={this.state.Cidade} onChange={this.AtualizaEstado}></input>
 
                         </label>
                         <label> <span>Endereço:</span>
                             <input type="text" placeholder="Digite o endereço" aria-label="Digite o endereço" name="Endereco"
-                                required className="in_logine"  onChange={this.AtualizaEstado}></input>
+                                required className="in_logine" value={this.state.Endereco} onChange={this.AtualizaEstado}></input>
 
                             <label> <span className="c">Nº:</span>
 
                                 <input type="text" placeholder="" aria-label="Digite o numero" name="Numero"
-                                    required className="in_loginn" onChange={this.AtualizaEstado}></input>
+                                    required className="in_loginn" value={this.state.Numero} onChange={this.AtualizaEstado}></input>
 
                             </label>
 
                         </label>
                         <label> <span>CEP:</span>
-                            <input type="text" placeholder="Digite o telefone" aria-label="Digite o telefone" name="Telefone"
-                                required className="in_login"  onChange={this.AtualizaEstado}></input>
+                            <input type="text" placeholder="Digite o cep" aria-label="Digite o Cep" name="Cep"
+                                required className="in_login" value={this.state.Cep} onChange={this.AtualizaEstado}></input>
                         </label>
                         <label> <span>Telefone:</span>
                             <input type="text" placeholder="Digite o telefone" aria-label="Digite o telefone" name="Telefone"
-                                required className="in_login"  onChange={this.AtualizaEstado}></input>
+                                required className="in_login" value={this.state.Telefone} onChange={this.AtualizaEstado}></input>
                         </label>
                         <label className="espaco_span"> <span>CNPJ:</span>
 
                             <input type="text" placeholder="Digite o CNPJ" aria-label="Digitar CNPJ" name="Cnpj" required
-                                className="in_login"  onChange={this.AtualizaEstado}></input>
+                                className="in_login" value={this.state.Cnpj}  onChange={this.AtualizaEstado}></input>
                         </label>
-                        <button type="submit" class="btn_">Cadastrar</button>
+                        <div className="espaco_btn_login">
+                        <button type="submit" className="btn_"><p>Cadastrar</p></button>
+                        </div>
 
 
                     </form>

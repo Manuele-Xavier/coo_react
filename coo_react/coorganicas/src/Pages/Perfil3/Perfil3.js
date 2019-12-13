@@ -129,12 +129,12 @@ class Perfil3 extends Component {
     
                 <div className="direito2">
                     <h1 className="t_perfil">Minhas Reservas</h1>
-                    <form method="get" id="form_busca" className="formdi_busca">
+                    {/* <form method="get" id="form_busca" className="formdi_busca">
                         <label>
                             <input type="text" placeholder="Digite o produto..." className="form_buscai"
                                 aria-label="buscar produto"/>
                         </label>
-                    </form>
+                    </form> */}
                     <form method="GET" id="form_meusprodutos" className="products">
                     {
                     //varrer a lista de evento

@@ -8,7 +8,7 @@ const api = Axios.create({
     baseURL:"http://localhost:5000/api",
     headers:{
         "Content-Type" : "application/json",
-        "Authentication" : "Bearer " + localStorage.getItem("user-coorganicas")
+        "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas")
     }
 });
 

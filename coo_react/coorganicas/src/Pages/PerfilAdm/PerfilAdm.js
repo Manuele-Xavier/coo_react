@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
+// import ImgPerfil2 from '../../Img/celeiro (1).svg';
+import {Link} from 'react-router-dom';
+import img_usuario from '../../Assets/images/celeiro (1).svg'
 import { parseJwt } from '../../Services/auth';
 
-import {Link} from 'react-router-dom';
-import img_usuario2 from '../../Assets/images/casinha.png'
 
 
-class MenuPerfilC extends Component{
+class PerfilAdm extends Component{
+
     constructor() {
         super();
         this.state = {
@@ -18,6 +20,7 @@ class MenuPerfilC extends Component{
             }
 
         }
+
         mostrarNome = () => {
             let config = {
                 headers: {
@@ -49,24 +52,37 @@ class MenuPerfilC extends Component{
             //console.log('Did');
             this.mostrarNome();
         }
+    
+        NomeEstado = (event) => {
+            this.setState({ [event.target.name]: event.target.value })
+        }
+    
     render(){
         return(
             // <div className="container_perfil">
-            <div class="esquerdo">
+            <div className="esquerdo">
             <nav className="menu_perfil">
-                <div>
                 
-                <Link to='#' title="Perfil de configuração do site Coorgânicas" ><img src={this.state.user.imagemUsuario && require(`../../Assets/images/Perfil/${this.state.user.imagemUsuario}`)}/></Link>  
-                <Link to='#' title="Perfil de configuração do site Coorgânicas" ><p>{this.state.user.Nome_Usuario}</p></Link>  
-                <Link  to='/Perfil4'  title="Meus produtos do site Coorgânicas" ><p>Cadastrar Receitas</p></Link>
-                <Link to = '/Perfil3'title="Cadastrar produtos do site Coorgânicas" ><p>Minhas Reservas</p></Link> 
-                <Link to='/Perfilconfig' title="Minhas informações do site Coorgânicas" ><p>Minhas Informações</p></Link>
-                <Link to='/Login' title="Sair do site Coorgânicas" ><p>Sair</p></Link>
+
+                {
+                    //varrer a lista de evento
+                         <>
+                            <Link to='#' title="Perfil de configuração do site Coorgânicas" ><img src={this.state.user.imagemUsuario && require(`../../Assets/images/Perfil/${this.state.user.imagemUsuario}`)}/></Link>  
+                            <Link to='#' title="Perfil de configuração do site Coorgânicas" ><p>{this.state.user.Nome_Usuario}</p></Link>  
+                        </>
+                }
+                <div>
+                            <Link  to='/Perfil6'  title="Meus produtos do site Coorgânicas" ><p>Produtos</p></Link>
+                            <Link to = '/Perfil5'title="Cadastrar produtos do site Coorgânicas" ><p>Cadastrar Produtos</p></Link> 
+                            <Link to='/' title="Sair do site Coorgânicas" ><p>Sair</p></Link>
                 </div>
+                
+                
+                
             </nav>
             </div>
             // </div>
         )
     }
 }
-export default MenuPerfilC;
+export default PerfilAdm;

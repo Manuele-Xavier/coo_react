@@ -1,4 +1,3 @@
-
 .postscontainer{
     height: auto;
     background-position: 50% 50%;
@@ -93,13 +92,20 @@
 /* celular */
 @media(max-width:845px){
     .flexposts{
-        width: 300px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .cardcestas{
+        width: 220px;
+       
     }
     .postscontainer{
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin: auto;
-        width: 300px;
+        width: 100%;
     }
 }
