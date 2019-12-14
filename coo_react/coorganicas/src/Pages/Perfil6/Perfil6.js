@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import toastr from 'toastr';
 import { parseJwt } from '../../Services/auth';
-import PerfilAdm from '../PerfilAdm/PerfilAdm';
+import PerfilAdm from '../../Componentes/PerfilAdm/PerfilAdm';
 
 
 toastr.options = {
@@ -203,12 +203,14 @@ class Perfil6 extends Component{
                 
                     <div className="direito2">
                         <h1 className="t_perfil">Meus Produtos</h1>
-                        <div method="GET" id="form_meusprodutos" className="products" >
+                        <form method="GET" id="form_meusprodutos" className="products" >
                             
                         {
+                            
                             this.state.listaProdutos.map(function(produto) { 
                                
                                 return(
+                                   
                                     <div className="products2" onClick={()=>this.MaisInformacoes(produto)}>
                                         <img src={produto.imagemProduto && require(`../../Assets/images/produtos/${produto.imagemProduto}`)} alt="teste"/>
                                         <div className="espaco_inputi">
@@ -217,10 +219,12 @@ class Perfil6 extends Component{
                                             </label>
                                         </div>
                                     </div>
+                                    
                                 )
                             }.bind(this))
+                            
                         }
-                        </div>
+                        </form>
 
                         
                      

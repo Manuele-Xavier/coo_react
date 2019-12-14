@@ -189,7 +189,7 @@ class Login extends Component {
             console.log("Erro: ", erro)
             //this.setState({ erroMensagem: 'E-mail ou senha inválidos!' })
             //this.setState({ isLoading: false })
-            toastr.eroor("Erro ao efetuar o login!");
+            toastr.error("Erro ao efetuar o login!");
           })
    
     }

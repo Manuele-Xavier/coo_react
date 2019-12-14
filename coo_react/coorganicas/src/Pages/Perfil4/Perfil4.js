@@ -83,7 +83,7 @@ class CadastrarReceitas extends Component {
                 this.setState({
                     titulo: "",
                     conteudo: "",
-                    imagemReceita: ""
+                    imagemReceita: React.createRef()
                 })
             }
         })
@@ -104,16 +104,16 @@ class CadastrarReceitas extends Component {
                             <div className="tracado"><img src={ImgCadastroReceitas} alt="Campo para inserir uma imagem"/></div>
                             <div className="btn_file_espaco">
                                 <label>
-                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..."></input>
+                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..." className="input_enviar" onChange={this.atualizaStateCampo}></input>
                                 </label>
                             </div>
                         </div>
                         <div className="cadas_receita">
                             <label className="label_receita2"><span>Receita:</span>
-                                <input type="text" aria-label="Digite o seu nome" name="titulo" value= {this.state.titulo} required onChange={this.atualizaStateCampo}></input>
+                                <input type="text" aria-label="Digite o seu nome" name="titulo" value= {this.state.titulo} required onChange={this.atualizaStateCampo} className="input_da_receita"></input>
                             </label>
                             <label className="label_receita2"><span>Descrição da receita:</span>
-                                <textarea name="conteudo" cols="54" rows="10"   value= {this.state.conteudo} required onChange={this.atualizaStateCampo}></textarea>
+                                <textarea name="conteudo" cols="54" rows="10"   value= {this.state.conteudo} required onChange={this.atualizaStateCampo} className="input_da_text"></textarea>
                             </label>
                         </div>
                         <div className="espaco_perfils">

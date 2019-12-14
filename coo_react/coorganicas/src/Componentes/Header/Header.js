@@ -45,19 +45,22 @@ class Header extends Component{
                                     <>
                                     <Link to='/Perfil6' title="Perfil do Administrador" >Perfil
                                      </Link>
+                                    
                                      <a onClick={this.logout}>Sair</a>
                                      </>
                                 ) : (
                                     usuarioAutenticado() && parseJwt().Role === "Agricultor" ?(
                                         <>
                                         <Link to='/Perfil2' title="Perfil do agricultor" >Perfil </Link>
+                                       
                                         <a onClick={this.logout}>Sair</a>
                                         </>
                                     ) : (
                                     usuarioAutenticado() && parseJwt().Role === "Comunidade" ?(
                                         <>
                                         <Link to='/Perfil4' title="Perfil de comunidade" >Perfil </Link>
-                                        <a onClick={this.logout}>Sair</a>
+                                        
+                                        <Link onClick={this.logout}>Sair</Link>
                                         </>
                                     ):(
                                         <>

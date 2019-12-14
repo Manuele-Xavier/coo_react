@@ -102,11 +102,13 @@ class Receitas extends Component {
                 <div className="postscontainer">
                 <h1 className="tituloposts1">Receitas</h1>
                 <div className="flexposts">
+                
                 {
                     //varrer a lista de evento
                     this.state.lista.map(function (receita) {
                         console.log(receita);
                         return (
+                            
                             
                             <div className="cardcestas posts" onClick={() => this.modalDaReceita(receita.titulo, receita.conteudo)} key={receita.receitaId}>
 
@@ -117,6 +119,8 @@ class Receitas extends Component {
                                     
                                 
                             </div>
+                           
+                           
                             
 
                             //colocamos uma key pois cada linha em jsx precisa de um id unico
@@ -131,7 +135,7 @@ class Receitas extends Component {
 
                 
                     
-                    <div className="espacamento_pag">
+                    {/* <div className="espacamento_pag">
 
                         <ul className="paginacao">
                             <a href="#">
@@ -147,7 +151,7 @@ class Receitas extends Component {
                                 <li>Próxima</li>
                             </a>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div>
@@ -178,9 +182,10 @@ class Receitas extends Component {
                     </form>
                 </MDBContainer>
 
-                </div>
                 <Footer />
                 </div>
+                </div>
+                
             
 
 

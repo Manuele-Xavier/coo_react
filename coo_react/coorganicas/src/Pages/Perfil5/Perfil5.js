@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ImgCadastroProduto from '../../Assets/images/photo.svg';
 import toastr from 'toastr';
-import PerfilAdm from '../PerfilAdm/PerfilAdm';
+import PerfilAdm from '../../Componentes/PerfilAdm/PerfilAdm';
 
 
 toastr.options = {
@@ -103,6 +103,7 @@ class Perfil5 extends Component {
         return (
             <div className="container_perfil">
                 <PerfilAdm/>
+                
                 <div className="direito3">
                     <h1 className="t_perfil">Cadastrar Produtos</h1>
                     <form  id="form_receita" onSubmit={this.CadastrarProduto} onReset={this.limpaForm}>
@@ -121,8 +122,8 @@ class Perfil5 extends Component {
                         </div>
                         <div className="espaco_perfils">
                             <div className="btns_cadastroreceita">
-                                <button type="submit" className="btn">Adicionar</button>
-                                <button type="reset" className="btn">Cancelar</button>
+                                <button type="submit" className="btn_">Adicionar</button>
+                                <button type="reset" className="btn_">Cancelar</button>
                             </div>
                         </div>
                     </form>

@@ -71,10 +71,9 @@ class Perfil extends Component {
         this.setState({ loading: true });
 
         let produto = {
-            produtoId: 1,
+            produtoId: this.state.produto,
             validade: this.state.validade,
             descricao: this.state.descricao,
-            produto: this.state.produto,
             cidade: this.state.cidade,
             regiao: this.state.regiao,
             quantidade: this.state.quantidade,
@@ -141,12 +140,12 @@ class Perfil extends Component {
             <main>
                 <div className="container_perfil">
                     <MenuPerfilA/>
-                       
+                       <div className="direito_oferta">
                     
                     <form method="POST" id="form_cadastro_produtos" onSubmit={this.cadastrarProduto.bind(this)} onReset={this.limpaForm}>
                         <h1 className="t_perfil">Cadastrar Oferta</h1>
 
-                        <select name="produto" class="select_cadastro" aria-label="Digite o Produto" onChange={this.AtulizaProdutoId} value={this.state.produto}>
+                        <select name="produto" class="select_cadastro" aria-label="Digite o Produto" onChange={this.AtulizaProdutoId} value={this.state.produto} className="select_oferta">
                             <option value="Selecione o Produto" disabled>Selecione o Produto</option>
                             {
                                 this.state.listaProduto.map(function(produto){
@@ -180,6 +179,7 @@ class Perfil extends Component {
                             <button type="reset" class="btn_">Cancelar</button>
                         </div>
                     </form>
+                    </div>
                 </div>
             </main>            
         );

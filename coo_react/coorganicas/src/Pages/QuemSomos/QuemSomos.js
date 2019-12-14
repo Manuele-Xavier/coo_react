@@ -1,15 +1,20 @@
 //fazendo a componentização da página quem somos - Julia
-import React from 'react';
+import React  from 'react';
 import '../../Assets/css/estilo.css';
 import '../../Assets/css/quemsomos.css';
 import img_quem from '../../Assets/images/img-quem-somos.jpg';
 import Header from '../../Componentes/Header/Header';
 import Footer from '../../Componentes/Footer/Footer';
+import CardC from '../CardC/CardC';
+
+
+
 
 
 function App(){
     return(
         <main>  
+            
             <Header/>
         <section>
             <div className="titulo_quemsomos">
@@ -42,19 +47,19 @@ function App(){
         </section>
         <section className="comunidade">
             <div className="cotaniner column">
-                <div className="comentarios">
-                    <h5>Comunidade</h5>
-                    <p>
-                        Com a coorgnicas eu mudei minha vida, 
-                        ganhei uma renda e uma família dentro da cooperativa.
-                    </p>
-                    <div>
-                        - Amanda Nunes.
-                    </div>
-                </div>
-            </div>
-        </section>   
+               
+               
+                </div> 
+                    
+               
+                           
+        </section> 
+        <div className="TESTE">
+            <CardC>     
+                </CardC>   
+        </div>
         <Footer/>
+    
     </main>
 
     );

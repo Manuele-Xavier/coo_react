@@ -14,6 +14,7 @@ import Perfil5 from './Pages/Perfil5/Perfil5'
 import Perfil6 from './Pages/Perfil6/Perfil6'
 import PerfilConfig from './Pages/PerfilConfig/PerfilConfig'
 import PerfilConfig2 from './Pages/PerfilConfig2/PerfilConfig2'
+import PerfilConfig3 from './Pages/PerfilConfig3/PerfilConfig3'
 import * as serviceWorker from './serviceWorker';
 import {Route,BrowserRouter as Router , Switch,Redirect} from 'react-router-dom';
 
@@ -96,6 +97,7 @@ const Rotas= (
             <Route exact path ="/Perfil4" component={Perfil4}/>
             <Route exact path ="/PerfilConfig" component={PerfilConfig}/>
             <Route exact path ="/PerfilConfig2" component={PerfilConfig2}/>
+            <Route exact path ="/PerfilConfig3" component={PerfilConfig3}/>
             <Route exact path ="/Perfil5" component={Perfil5}/>
             <Route exact path ="/Perfil6" component={Perfil6}/>
             

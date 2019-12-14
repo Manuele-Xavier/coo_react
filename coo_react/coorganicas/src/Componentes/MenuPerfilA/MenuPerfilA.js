@@ -3,16 +3,24 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import img_usuario from '../../Assets/images/celeiro (1).svg'
 import { parseJwt } from '../../Services/auth';
+import { slide as Menu } from 'react-burger-menu'
 
 
 
 class MenuPerfilA extends Component{
 
+    showSettings ( event ) {
+        event . preventDefault ();
+       
+     }
+
     constructor() {
         super();
         this.state = {
             lista: [],
+            menuOpen: false,
             user:{
+
                 Nome_Usuario: "",
                 imagemUsuario:""
             }
@@ -20,6 +28,20 @@ class MenuPerfilA extends Component{
             }
 
         }
+         
+
+        handleStateChange (state) {
+            this.setState({menuOpen: state.isOpen})  
+          }
+
+        closeMenu () {
+            this.setState({menuOpen: false})
+          }
+
+          toggleMenu () {
+            this.setState(state => ({menuOpen: !state.menuOpen}))
+          }
+        
 
         mostrarNome = () => {
             let config = {
@@ -51,6 +73,7 @@ class MenuPerfilA extends Component{
         componentDidMount() {
             //console.log('Did');
             this.mostrarNome();
+            
         }
     
         NomeEstado = (event) => {
@@ -60,9 +83,15 @@ class MenuPerfilA extends Component{
     render(){
         return(
             // <div className="container_perfil">
-            <div className="esquerdo">
+
+            <div>
+                <Menu
+                isOpen={this.state.menuOpen}
+                onStateChange={(state) => this.handleStateChange(state)}
+                >
+            <div className="esquerdo"  onClick={() => this.closeMenu()}>
             <nav className="menu_perfil">
-                
+                <div>
 
                 {
                     //varrer a lista de evento
@@ -71,18 +100,24 @@ class MenuPerfilA extends Component{
                             <Link to='#' title="Perfil de configuração do site Coorgânicas" ><p>{this.state.user.Nome_Usuario}</p></Link>  
                         </>
                 }
-                <div>
+                <>
+                
                             <Link  to='/Perfil2'  title="Meus produtos do site Coorgânicas" ><p>Minhas Ofertas</p></Link>
                             <Link to = '/Perfil'title="Cadastrar produtos do site Coorgânicas" ><p>Cadastrar Oferta</p></Link> 
                             <Link to='/Perfilconfig2' title="Minhas informações do site Coorgânicas" ><p>Minhas Informações</p></Link>
-                            <Link to='/' title="Sair do site Coorgânicas" ><p>Sair</p></Link>
-                </div>
+                            <Link to='/' title="Sair do site Coorgânicas" ><p>Home</p></Link>
+                            </>
+                            </div>
+                
                 
                 
                 
             </nav>
             </div>
-            // </div>
+            </Menu>
+            <i class="fas fa-bars fa-3x"   onClick={() => this.toggleMenu()}  id="icon_font" > </i>
+            <i class="fas fa-bars fa-2x" onClick={() => this.toggleMenu()} id="icon_font_mobile" ></i>
+            </div>
         )
     }
 }

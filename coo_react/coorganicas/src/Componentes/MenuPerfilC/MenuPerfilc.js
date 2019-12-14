@@ -1,14 +1,23 @@
 import React,{Component} from 'react';
 import { parseJwt } from '../../Services/auth';
-
+import { slide as Menu } from 'react-burger-menu'
 import {Link} from 'react-router-dom';
 import img_usuario2 from '../../Assets/images/casinha.png'
 
 
 class MenuPerfilC extends Component{
+
+
+    // showSettings ( event ) {
+    //     event . preventDefault ();
+       
+    //  }
     constructor() {
         super();
         this.state = {
+            menuOpen: false,
+            
+            
             lista: [],
             user:{
                 Nome_Usuario: "",
@@ -18,6 +27,17 @@ class MenuPerfilC extends Component{
             }
 
         }
+        handleStateChange (state) {
+            this.setState({menuOpen: state.isOpen})  
+          }
+
+        closeMenu () {
+            this.setState({menuOpen: false})
+          }
+
+          toggleMenu () {
+            this.setState(state => ({menuOpen: !state.menuOpen}))
+          }
         mostrarNome = () => {
             let config = {
                 headers: {
@@ -49,10 +69,20 @@ class MenuPerfilC extends Component{
             //console.log('Did');
             this.mostrarNome();
         }
+
+        
+
+       
     render(){
         return(
             // <div className="container_perfil">
-            <div class="esquerdo">
+            <div>
+            <Menu 
+            isOpen={this.state.menuOpen}
+            onStateChange={(state) => this.handleStateChange(state)}
+            
+            >
+            <div class="esquerdo" onClick={() => this.closeMenu()}>
             <nav className="menu_perfil">
                 <div>
                 
@@ -61,11 +91,17 @@ class MenuPerfilC extends Component{
                 <Link  to='/Perfil4'  title="Meus produtos do site Coorgânicas" ><p>Cadastrar Receitas</p></Link>
                 <Link to = '/Perfil3'title="Cadastrar produtos do site Coorgânicas" ><p>Minhas Reservas</p></Link> 
                 <Link to='/Perfilconfig' title="Minhas informações do site Coorgânicas" ><p>Minhas Informações</p></Link>
-                <Link to='/Login' title="Sair do site Coorgânicas" ><p>Sair</p></Link>
+                <Link to='/Login' title="Sair do site Coorgânicas" ><p>Home</p></Link>
                 </div>
             </nav>
             </div>
-            // </div>
+            </Menu>
+
+            <i class="fas fa-bars fa-3x"   onClick={() => this.toggleMenu()}  id="icon_font" > </i>
+            <i class="fas fa-bars fa-2x" onClick={() => this.toggleMenu()} id="icon_font_mobile" ></i>
+
+
+            </div>
         )
     }
 }

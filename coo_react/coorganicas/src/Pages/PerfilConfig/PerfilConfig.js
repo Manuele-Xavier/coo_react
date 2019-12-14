@@ -6,6 +6,7 @@ import toastr from 'toastr';
 import img_perfil3 from '../../Assets/images/photo.svg'
 import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
 import { parseJwt } from '../../Services/auth';
+import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 
 
 
@@ -196,7 +197,7 @@ toastr.options = {
     render(){
         return(
             <div className="container_perfil">
-               <MenuPerfilA/>
+               <MenuPerfilC/>
                 <form  id="form_cadastro_conf" onSubmit={this.putUsuario} onReset={this.limpaForm}>
                                              
                             

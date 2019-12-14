@@ -432,7 +432,7 @@ class Produto extends Component {
                  let Obj = {} //new Object();
    
                  let Telefone = "";
-                 let Coooperativa = "";
+                 //let Coooperativa = "";
 
 
                  console.log("telefones", this.state.Telefones)
@@ -440,7 +440,7 @@ class Produto extends Component {
                  this.state.Telefones.forEach(element => {
                        if(element.usuarioId === oferta.usuarioId) {
                            Telefone = element.telefone1;
-                           Coooperativa = element.usuario.nome;
+                           //Coooperativa = element.usuario.nome;
                        }
                  });    
                 
@@ -452,7 +452,7 @@ class Produto extends Component {
                  Obj.preço = "R$: " + oferta.preco.toFixed(2);
                  Obj.quantidade = oferta.quantidade.toFixed(3) + " Kg";
                  Obj.validade = new Intl.DateTimeFormat('pt-BR', options).format(Date.parse(oferta.validade))
-                 Obj.cooperativa = Coooperativa;//oferta.usuario.nome;
+                 Obj.cooperativa = oferta.usuario.nome;//Coooperativa;
                  Obj.contato = Telefone ? Telefone : "Sem telefone";
    
                  OfertaFiltrada.push(Obj);
@@ -635,7 +635,7 @@ class Produto extends Component {
                                         <img src={produto.imagemProduto && require(`../../Assets/images/produtos/${produto.imagemProduto}`)} alt="teste"/>
                                         <div className="card_btn">
                                             <label>
-                                              <Link to="/"><button type="button" className="btn2">Fornecer</button></Link>
+                                              <Link to="/Login"><button type="button" className="btn2">Fornecer</button></Link>
                                             </label>
                                             <label>
                                                 <button type="submit" className="btn1" onClick={() => this.VerOfertas(produto.produtoId)}>Ver Ofertas</button>

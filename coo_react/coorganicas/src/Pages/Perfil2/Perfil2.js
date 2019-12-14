@@ -205,7 +205,7 @@ class Perfil2 extends Component{
                 
                     <div className="direito2">
                         <h1 className="t_perfil">Minhas Ofertas</h1>
-                        <div method="GET" id="form_meusprodutos" className="products" >
+                        <form method="GET" id="form_meusprodutos" className="products" >
                             
                         {
                             this.state.listaProdutos.map(function(oferta) { 
@@ -226,10 +226,10 @@ class Perfil2 extends Component{
                             
                             
 
-                        </div>
+                        </form>
 
                         
-                    </div>  
+                     
                 
                 
                 
@@ -275,6 +275,7 @@ class Perfil2 extends Component{
             </MDBModal>
             </form>
           </MDBContainer>
+          </div> 
           </div>
           </main>
          
