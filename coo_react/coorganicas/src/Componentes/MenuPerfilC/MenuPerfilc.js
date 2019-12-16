@@ -89,6 +89,8 @@ class MenuPerfilC extends Component{
                 <Link to='#' title="Perfil de configuração do site Coorgânicas" ><img src={this.state.user.imagemUsuario && require(`../../Assets/images/Perfil/${this.state.user.imagemUsuario}`)}/></Link>  
                 <Link to='#' title="Perfil de configuração do site Coorgânicas" ><p>{this.state.user.Nome_Usuario}</p></Link>  
                 <Link  to='/Perfil4'  title="Meus produtos do site Coorgânicas" ><p>Cadastrar Receitas</p></Link>
+                <Link  to='/MinhasReceitas' title="Minhas receitas do site Coorgânicas" ><p>Minhas Receitas</p></Link>
+
                 <Link to = '/Perfil3'title="Cadastrar produtos do site Coorgânicas" ><p>Minhas Reservas</p></Link> 
                 <Link to='/Perfilconfig' title="Minhas informações do site Coorgânicas" ><p>Minhas Informações</p></Link>
                 <Link to='/Login' title="Sair do site Coorgânicas" ><p>Home</p></Link>

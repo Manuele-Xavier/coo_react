@@ -93,6 +93,15 @@ class CadastrarReceitas extends Component {
         })
     }
 
+    putSetStateFile = (input) =>{
+        this.setState({
+                ...this.state.imagemReceita, [input.target.name] : input.target.files[0]
+              
+        })
+
+        console.log("Atualizou ", this.state.imagemReceita )
+    }
+
     render() {
         return (
             <div className="container_perfil">
@@ -104,7 +113,7 @@ class CadastrarReceitas extends Component {
                             <div className="tracado"><img src={ImgCadastroReceitas} alt="Campo para inserir uma imagem"/></div>
                             <div className="btn_file_espaco">
                                 <label>
-                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..." className="input_enviar" onChange={this.atualizaStateCampo}></input>
+                                    <input type="file" aria-label="Digite o seu nome" name="imagemReceita" ref={this.state.imagemReceita} required placeholder="Enviar arquivo..." className="input_enviar" onChange={this.putSetStateFile}></input>
                                 </label>
                             </div>
                         </div>

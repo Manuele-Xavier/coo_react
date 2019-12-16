@@ -5,6 +5,7 @@ import '../../Assets/css/perfil.css'
 import '../../Assets/css/estilo.css'
 import '../../Assets/css/menuPerfil.css'
 import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
+import Axios from 'axios';
 
 
 
@@ -53,6 +54,36 @@ class Perfil3 extends Component {
         //desabilita o icone apos dois segundos
 
 
+
+    }
+    BuscarMinhasReservas (){
+
+        // var id=parseJwt().Id
+        // console.log(id)
+        console.log("Tok " + localStorage.getItem("user-coorganicas"))
+        
+        let config = {
+            headers: {
+                "Content-Type":"application/json",
+                // "Access-Control-Allow-Origin":"*",
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas") 
+            }
+        }
+
+
+        Axios.get('http://localhost:5000/api/Reserva/minhasReservas',config)
+        .then(response=> {
+            if(response.status === 200){
+                    
+                    this.setState({lista : response.data});
+                
+                
+               // console.log(this.state.listaProdutos);
+
+            };
+        })
+
+        
 
     }
 
@@ -107,7 +138,7 @@ class Perfil3 extends Component {
 
     componentDidMount() {
         //console.log('Did');
-        this.mostrarReserva();
+        this.BuscarMinhasReservas();
     }
 
     receitaEstado = (event) => {

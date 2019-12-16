@@ -244,13 +244,7 @@ class Login extends Component {
                     </div>
                     <form  onSubmit= {this.CadastrarCooperativa}method="GET" id="form_cadastro" className="cadastro_login">
                        
-                        <div className="espaco">
-                            <div className="radius">
-                                {/*os values estão com valores determinados pelo banco de dados */ }
-                                <input type="radio" name="perfil" className="btn_cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
-                                <input type="radio" name="perfil" className="btn_cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
-                            </div>
-                        </div>
+                       
 
                         <label> <span>Razão Social</span>
                             <input type="text" placeholder="Digite o seu nome" aria-label="Digitar o  seu nome " name="RazaoSocial" 
@@ -307,6 +301,13 @@ class Login extends Component {
                             <input type="text" placeholder="Digite o CNPJ" aria-label="Digitar CNPJ" name="Cnpj" required
                                 className="in_login" value={this.state.Cnpj}  onChange={this.AtualizaEstado}></input>
                         </label>
+                        <div className="espaco">
+                            <div className="radius">
+                                {/*os values estão com valores determinados pelo banco de dados */ }
+                                <input type="radio" name="perfil" className="btn_cadastro" value={3} onChange={this.AtualizaEstado}/>Agricultor
+                                <input type="radio" name="perfil" className="btn_cadastro" value={2} onChange={this.AtualizaEstado}/>Comunidade
+                            </div>
+                        </div>
                         <div className="espaco_btn_login">
                         <button type="submit" className="btn_"><p>Cadastrar</p></button>
                         </div>

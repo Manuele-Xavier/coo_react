@@ -78,6 +78,8 @@ header {
 @media(max-width:845px){
     header .container_ {
         flex-direction: row;
+        justify-content: space-between;
+        width: 95%;
     }
 
     .menu nav ul {
