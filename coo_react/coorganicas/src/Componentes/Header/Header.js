@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../../Assets/images/logooriginal.png';
 import '../../Assets/css/header.css'
-import '../../Assets/js/MenuMobile'
+// import '../../Assets/js/MenuMobile'
 
 import {Link,withRouter} from 'react-router-dom';
 import { usuarioAutenticado, parseJwt } from '../../Services/auth';
@@ -20,14 +20,60 @@ class Header extends Component{
                             className="logooriginal"/>
                 </Link>
                 </div>
+
+                
+
                 <div className="menu">
+
+                
                     <nav>
-                        <div className="menuMobile">
-                            <div className="mm_line"></div>
-                            <div className="mm_line"></div>
-                            <div className="mm_line"></div>
+
+                    <div class="dropdown">
+                    <i class="fas fa-bars fa-2x"  id="icone_menu_home" > </i>
+                    <div class="dropdown-content">
+                    <Link to='/' title="Home do site Coorganicas">Home</Link>
+                    <Link to='/quemsomos' title="Quem Somos do site Coorganicas" >Quem Somos</Link>
+                    <Link to='/produtos' title="Produtos do site Coorganicas" >Produtos</Link>
+                    <Link to='/receitas' title="Receitas do site Coorganicas" >Receitas</Link>
+
+
+                    {usuarioAutenticado() && parseJwt().Role === "Administrador" ?(
+                                    <>
+                                    <Link to='/Perfil6' title="Perfil do Administrador" >Perfil
+                                     </Link>
+                                    
+                                     <a onClick={this.logout}>Sair</a>
+                                     </>
+                                ) : (
+                                    usuarioAutenticado() && parseJwt().Role === "Agricultor" ?(
+                                        <>
+                                        <Link to='/Perfil2' title="Perfil do agricultor" >Perfil </Link>
+                                       
+                                        <a onClick={this.logout}>Sair</a>
+                                        </>
+                                    ) : (
+                                    usuarioAutenticado() && parseJwt().Role === "Comunidade" ?(
+                                        <>
+                                        <Link to='/Perfil4' title="Perfil de comunidade" >Perfil </Link>
+                                        
+                                        <Link onClick={this.logout}>Sair</Link>
+                                        </>
+                                    ):(
+                                        <>
+                                        <Link to='/login' title="Login/Cadastre-se do site Coorganicas" >Login /
+                                        Cadastre-se </Link>
+                                        </>
+                                    )
+                                    
+                                    )
+                                
+                            )} 
+                    </div>
+                    </div>
+                        
                             
-                        </div>
+                       
+
                         <ul>
                             <React.Fragment>
                                 <Link to='/' title="Home do site Coorganicas">Home</Link>

@@ -5,6 +5,7 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 import toastr from 'toastr';
 import MenuPerfilA from '../../Componentes/MenuPerfilA/MenuPerfilA';
 import { parseJwt } from '../../Services/auth';
+import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 
 
 toastr.options = {
@@ -37,12 +38,11 @@ class MinhasReceitas extends Component{
         this.state = {
             lista : [],
             modal : false,
-
             InformacoesReceita : {
-
                 receitaid:"",
                 conteudo :"",
-                titulo :""
+                titulo :"",
+                imagemReceita: React.createRef()
             }
 
         }
@@ -52,7 +52,7 @@ class MinhasReceitas extends Component{
         this.setState({
           modal: !this.state.modal
         });
-        this.BuscarMeusProdutos()
+        this.BuscarMinhasreceitas()
       }
       
 
@@ -111,34 +111,48 @@ class MinhasReceitas extends Component{
     putSetState=(input)=>{
         this.setState({
             InformacoesReceita :{
-                ...this.state.InformacoesOferta, [input.target.name] : input.target.value
+                ...this.state.InformacoesReceita, [input.target.name] : input.target.value
             }
         })
     }
 
-    AtulizaQuantidade = (input) => {
-        this.setState({
-            InformacoesOferta :{
-                ...this.state.InformacoesOferta, [input.target.name] : parseFloat(input.target.value)
-            }
-        })
+    // AtulizaQuantidade = (input) => {
+    //     this.setState({
+    //         InformacoesOferta :{
+    //             ...this.state.InformacoesOferta, [input.target.name] : parseFloat(input.target.value)
+    //         }
+    //     })
         
+    // }
+
+    putSetStateFile = (input) =>{
+        this.setState({
+            InformacoesReceita : {
+                ...this.state.InformacoesReceita, [input.target.name] : input.target.files[0]
+            }   
+        })
+
+        // console.log("Atulizou ", this.state.putUsuario.imagemUsuario )
     }
+
+
+
     
     AlteraInfo=(event)=>{
         event.preventDefault();
-        let oferta_id = this.state.InformacoesOferta.ofertaid;
+        let receita_id = this.state.InformacoesReceita.receitaid;
         let usuario = new FormData();
-        usuario.set("preco", this.state.InformacoesOferta.preco)
-        usuario.set("quantidade", this.state.InformacoesOferta.quantidade)
-        usuario.set("descricao", this.state.InformacoesOferta.descricao)
+        usuario.set("titulo", this.state.InformacoesReceita.titulo)
+        usuario.set("conteudo", this.state.InformacoesReceita.conteudo)
+        usuario.set("imagemReceita",this.state.InformacoesReceita.imagemReceita)
+        usuario.set("receitaId",this.state.InformacoesReceita.receitaid)
 
-        console.log(this.state.InformacoesOferta.preco)
-        console.log(this.state.InformacoesOferta.quantidade)
-        console.log(this.state.InformacoesOferta.produto)
+        // console.log(this.state.InformacoesOferta.preco)
+        // console.log(this.state.InformacoesOferta.quantidade)
+        // console.log(this.state.InformacoesOferta.produto)
         console.log(localStorage.getItem("user-coorganicas"))
 
-        fetch('http://localhost:5000/api/Oferta/'+oferta_id,{
+        fetch('http://localhost:5000/api/Receita/'+receita_id,{
             method:"PUT",           
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")                
@@ -159,7 +173,7 @@ class MinhasReceitas extends Component{
         
     }
 
-    DeletarOferta(oferta){
+    DeletarOferta(receita){
 
         let config = {
             headers: {
@@ -169,9 +183,9 @@ class MinhasReceitas extends Component{
             }
         }
 
-        let oferta_id = this.state.InformacoesOferta.ofertaid
+        let receita_id = this.state.InformacoesReceita.receitaid
 
-        Axios.delete('http://localhost:5000/api/Oferta/'+oferta_id, config)
+        Axios.delete('http://localhost:5000/api/Receita/'+receita_id, config)
         .then(response => {
             if(response.status===200){
                 if(response.erro !== true){
@@ -191,7 +205,7 @@ class MinhasReceitas extends Component{
             
             <main className="mobile">
                 <div className="container_perfil">
-                    <MenuPerfilA/>
+                    <MenuPerfilC/>
                 
                     <div className="direito2">
                         <h1 className="t_perfil">Minhas Receitas</h1>
@@ -210,7 +224,7 @@ class MinhasReceitas extends Component{
                                         </div>
                                     </div>
                                 )
-                            })
+                            }.bind(this))
                         }
                                 
                             
@@ -230,12 +244,15 @@ class MinhasReceitas extends Component{
               <MDBModalHeader toggle={this.toggle}> Informações da sua Receita:</MDBModalHeader>
               <MDBModalBody>
                 <label> <span>Receita: </span>
-                        <input type="text" aria-label="Digite sua Região" name= "produto" readOnly value= {this.state.InformacoesReceita.titulo} onChange={this.putSetState}></input>
+                        <input type="text" aria-label="Digite sua Região" name= "titulo" value= {this.state.InformacoesReceita.titulo} onChange={this.putSetState}></input>
                     </label> 
                 
                     <label> <span>Descrição: </span>
-                        <input type="text" aria-label="Digite a descrição do produto" name="descricao"  value={this.state.InformacoesReceita.conteudo} onChange={this.putSetState} ></input>
+                        <input type="text" aria-label="Digite a descrição do produto" name="conteudo"  value={this.state.InformacoesReceita.conteudo} onChange={this.putSetState} ></input>
                     </label>
+                    <label><span>Imagem: </span>
+                        <input type="file" aria-label="Digite o seu nome" name="imagemReceita" onChange={this.putSetStateFile} ref={this.state.InformacoesReceita.imagemReceita}  placeholder="Enviar arquivo..." className="img__inputt"/>
+                    </label>>
                
               </MDBModalBody>
               <MDBModalFooter>

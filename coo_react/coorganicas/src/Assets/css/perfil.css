@@ -255,7 +255,7 @@ box-shadow: 5px 5px 5px 0px rgba(204,204,204,1);
     .btn_file_espaco{
         display: flex;
         justify-content: center;
-        width: 300px;
+        width: 330px;
         padding-top: 30px;
         
     }
@@ -390,6 +390,9 @@ box-shadow: 5px 5px 5px 0px rgba(204,204,204,1);
     margin: auto;
     
    }
+   .products2{
+    margin-bottom: 30px;
+   }
   
 
    .direito2{
@@ -443,7 +446,8 @@ box-shadow: 5px 5px 5px 0px rgba(204,204,204,1);
        display: flex;
        justify-content: center;
        align-items: center;
-       width: 40%
+       width: 40%;
+     
    }
    .formdi_busca input{
        width: 80vw;
@@ -478,19 +482,19 @@ box-shadow: 5px 5px 5px 0px rgba(204,204,204,1);
        margin:auto;
    }
    .tracado{
-       width: 70vw;
+       width: 230px;
    }
    .img__inputt{
-    width: 70vw;
+    width: 230px;
     
    }
    .carde_receita{
-       width: 70vw;
+       width: 230px;
        background-color: #FFFFFF !important;
        
    }
    .btn_file_espaco{
-       width: 70vw;
+       width: 230px;
    }
 
    

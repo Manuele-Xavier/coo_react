@@ -6,6 +6,26 @@ import '../../Assets/css/estilo.css'
 import '../../Assets/css/menuPerfil.css'
 import MenuPerfilC from '../../Componentes/MenuPerfilC/MenuPerfilc';
 import Axios from 'axios';
+import toastr from 'toastr';
+
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "latestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "6000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 
 
 
@@ -89,27 +109,52 @@ class Perfil3 extends Component {
 
     //delete
 
-    deletarReserva = (reserva) => {
-        let id_Reserva = this.state.modalReserva.idReserva
-        this.setState({ erroMsg: "" })
+    // deletarReserva = (reserva) => {
+    //     let id_Reserva = this.state.modalReserva.idReserva
+    //     this.setState({ erroMsg: "" })
 
-        console.log("Excluindo");
+    //     console.log("Excluindo");
 
-        fetch("http://localhost:5000/api/Reserva/" + id_Reserva, {
-            method: "DELETE",
+    //     fetch("http://localhost:5000/api/Reserva/" + id_Reserva, {
+    //         method: "DELETE",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(response => {
+    //             // console.log(response);
+    //             this.mostrarReserva();
+    //             this.setState(() => ({ lista: this.state.lista }));
+    //             this.toggle();
+    //         })
+
+    // }
+    deletarReserva(reserva){
+
+        let config = {
             headers: {
-                "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + localStorage.getItem("user-coorganicas")
+                "Content-Type":"application/json",
+                // "Access-Control-Allow-Origin":"*",
+                "Authorization" : "Bearer " + localStorage.getItem("user-coorganicas") 
             }
-        })
-            .then(response => response.json())
-            .then(response => {
-                // console.log(response);
-                this.mostrarReserva();
-                this.setState(() => ({ lista: this.state.lista }));
-                this.toggle();
-            })
+        }
 
+        let id_Reserva = this.state.modalReserva.idReserva
+
+        Axios.delete('http://localhost:5000/api/Reserva/'+id_Reserva, config)
+        .then(response => {
+            if(response.status===200){
+                if(response.erro !== true){
+                    toastr.success("Oferta deletada com sucesso"); //error warning
+                    // this.toggle();
+                }
+            }
+        }).catch(error => {
+            toastr.error("Falha em deletar a oferta pois ja está reservada")
+        })
+        
     }
 
 
@@ -181,7 +226,7 @@ class Perfil3 extends Component {
 
 
                                             <img src={img_perfil3} className="imgpro" alt="produto" />
-                                            <p className="t_products">quantidade de produtos</p>
+                                            <p className="t_products"></p>
 
 
                                         </div>
@@ -194,13 +239,6 @@ class Perfil3 extends Component {
 
                                 }.bind(this))
                             }
-
-
-
-                            <div className="btn_perfilespa">
-                                <button type="button" className="btn_">adicionar</button>
-
-                            </div>
 
                         </form>
 
@@ -220,13 +258,13 @@ class Perfil3 extends Component {
 
                                         <div>
 
-                                            <p>Data da {this.state.modalReserva.dataDaReserva}</p>
+                                            <p>Data da reserva: {this.state.modalReserva.dataDaReserva}</p>
 
-                                            <p>{this.state.modalReserva.quantidade}</p>
+                                            <p>Quantidade : {this.state.modalReserva.quantidade}</p>
 
-                                            <p>{this.state.modalReserva.dataDaEspera}</p>
+                                            <p>Data de espera: {this.state.modalReserva.dataDaEspera}</p>
 
-                                            <p>{this.state.modalReserva.statusReserva}</p>
+                                            <p>Status da reserva: {this.state.modalReserva.statusReserva}</p>
                                         </div>
                                     </MDBModalBody>
                                     <MDBModalFooter>

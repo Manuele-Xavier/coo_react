@@ -35,7 +35,7 @@ position: fixed;
   flex-direction: column;
   font-size: 1.3em;
   /* padding-top:20px !important; */
-  border-right: #BF0404 3px solid !important;
+  
 
   background-color:#EFF3F6 !important;
   /* height: 100%; */
@@ -55,6 +55,7 @@ position: fixed;
   line-height: 4.0em; 
   background-color:#EFF3F6 !important;
   /* border-right: #BF0404 3px solid !important; */
+  border-right: #BF0404 3px solid !important;
   /* position: relative; */
   /* height: 754px; */
   height: 100vh;

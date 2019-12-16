@@ -93,7 +93,7 @@ class MenuPerfilC extends Component{
 
                 <Link to = '/Perfil3'title="Cadastrar produtos do site Coorgânicas" ><p>Minhas Reservas</p></Link> 
                 <Link to='/Perfilconfig' title="Minhas informações do site Coorgânicas" ><p>Minhas Informações</p></Link>
-                <Link to='/Login' title="Sair do site Coorgânicas" ><p>Home</p></Link>
+                <Link to='/' title="Sair do site Coorgânicas" ><p>Home</p></Link>
                 </div>
             </nav>
             </div>
